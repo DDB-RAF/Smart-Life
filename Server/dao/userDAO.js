@@ -17,12 +17,12 @@ var UserModel = db.mongoose.model('user',schema.userSchema);
  * 		err!=null:UserExits
  */
 exports.add = function(user,callback){
-	exports.findByName(user.userName,function(err,doc){
+	UserModel.findOne({userName:user.userName},function(err,doc){
 		if(err){
 			callback(err);
 		}else{
 			if(doc!=null){
-				err = new Error('UserExits');
+				err = new Error('User Exits');
 				callback(err);	
 			}else{
 				var u = new UserModel({
@@ -48,13 +48,9 @@ exports.add = function(user,callback){
  */
 exports.findById = function(id,callback){
 	UserModel.find({_id:id},function(err,doc){
-		if(err!=null){
-			callback(err,null);
-		}else{
-			callback(null,doc);
-		}
+		callback(err,doc);
 	});
-}
+};
 
 /**
  * input:
@@ -65,10 +61,34 @@ exports.findById = function(id,callback){
 
 exports.findByName = function(userName,callback){
 	UserModel.findOne({userName:userName},function(err,doc){
-		if(err!=null){
-			callback(err,null);
+		callback(err,doc);
+	});
+};
+
+/**
+ * input:
+ * 		user:{
+ * 			_id:ObjectId,
+ * 			passWord:String,
+ * 			name:String,
+ * 			email:String,
+ * 			phone:String
+ *		 }	
+ * callback(err)
+ * 		err==null:success
+ */
+exports.updateUser = function(user,callback){
+	UserModel.findOne({_id:user._id},function(err,doc){
+		if(err){
+			callback(err);
 		}else{
-			callback(null,doc);
+			doc.passWord = user.passWord;
+			doc.name = user.name;
+			doc.email = user.email;
+			doc.phone = user.phone;
+			doc.save(function(err){
+				callback(err);
+			});
 		}
 	});
-}
+};
