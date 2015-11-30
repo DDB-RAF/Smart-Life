@@ -1,7 +1,7 @@
 var schema = require('./schema.js');
 var db = require('./db.js');
 
-var UserModel = db.mongoose.model('user',schema.userSchema);
+var UserModel = db.mongoose.model('user', schema.userSchema);
 
 /**
  * input:
@@ -16,26 +16,26 @@ var UserModel = db.mongoose.model('user',schema.userSchema);
  * 		err==null:success
  * 		err!=null:UserExits
  */
-exports.add = function(user,callback){
-	UserModel.findOne({userName:user.userName},function(err,doc){
-		if(err){
+exports.add = function (user, callback) {
+	UserModel.findOne({ userName: user.userName }, function (err, doc) {
+		if (err) {
 			callback(err);
-		}else{
-			if(doc!=null){
-				err = new Error('User Exits');
-				callback(err);	
-			}else{
+		} else {
+			if (doc != null) {
+				err = new Error('User Exists');
+				callback(err);
+			} else {
 				var u = new UserModel({
-					userName:user.userName,
-					passWord:user.passWord,
-					name:user.name,
-					email:user.email,
-					phone:user.phone
+					userName: user.userName,
+					passWord: user.passWord,
+					name: user.name,
+					email: user.email,
+					phone: user.phone
 				});
-				u.save(function(err){
+				u.save(function (err) {
 					callback(err);
 				});
-			}	
+			}
 		}
 	});
 };
@@ -43,12 +43,12 @@ exports.add = function(user,callback){
 /**
  * input:
  * 		id:ObjectId
- * callback(err,docs):
+ * callback(err,doc):
  * 		err==null:success
  */
-exports.findById = function(id,callback){
-	UserModel.find({_id:id},function(err,doc){
-		callback(err,doc);
+exports.findById = function (id, callback) {
+	UserModel.findOne({ _id: id }, function (err, doc) {
+		callback(err, doc);
 	});
 };
 
@@ -59,9 +59,9 @@ exports.findById = function(id,callback){
  * 		err==null:success
  */
 
-exports.findByName = function(userName,callback){
-	UserModel.findOne({userName:userName},function(err,doc){
-		callback(err,doc);
+exports.findByName = function (userName, callback) {
+	UserModel.findOne({ userName: userName }, function (err, doc) {
+		callback(err, doc);
 	});
 };
 
@@ -77,18 +77,31 @@ exports.findByName = function(userName,callback){
  * callback(err)
  * 		err==null:success
  */
-exports.updateUser = function(user,callback){
-	UserModel.findOne({_id:user._id},function(err,doc){
-		if(err){
+exports.updateUser = function (user, callback) {
+	UserModel.findOne({ _id: user._id }, function (err, doc) {
+		if (err) {
 			callback(err);
-		}else{
+		} else {
 			doc.passWord = user.passWord;
 			doc.name = user.name;
 			doc.email = user.email;
 			doc.phone = user.phone;
-			doc.save(function(err){
+			doc.save(function (err) {
 				callback(err);
 			});
 		}
 	});
 };
+
+
+/**
+ * input : 
+ * 		_id : id
+ * callback(err)
+ * 		err==null : success
+ */
+exports.deleteUserById = function(id,callback){
+	UserModel.findByIdAndRemove(id,function(err){
+		callback(err);
+	});	
+}
