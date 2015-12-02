@@ -6,3 +6,11 @@ findByName(id,callback);
 updateUser(user,callback);
 deleteById(id,callback);
 
+supplier:
+
+
+add(supplier,callback);
+findById(id,callback);
+deleteById(id,callback);
+updateSupplier(supplier,callback);
+
