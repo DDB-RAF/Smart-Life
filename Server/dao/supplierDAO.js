@@ -26,6 +26,7 @@ exports.add = function(supplier,callback){
 		}else{
 			if(doc != null){
 				err = new Error('Supplier Exists')
+				callback(err);
 			}else{
 				var s = new SupplierModel({
 					userName:supplier.userName,
@@ -55,7 +56,7 @@ exports.add = function(supplier,callback){
 exports.findById = function(id,callback){
 	SupplierModel.findOne({_id:id},function(err,doc){
 		callback(err,doc);
-	})
+	});
 };
 
 /**
@@ -98,4 +99,5 @@ exports.updateSupplier = function(supplier,callback){
 		}
 	});
 };
+
 

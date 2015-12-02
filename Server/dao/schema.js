@@ -11,8 +11,8 @@ exports.supplierSchema = new Schema({
 	desc:String,
 	classification:{
 		name:String
-	},
-	services:[Schema.Types.ObjectId]
+	}
+	// services:[Schema.Types.ObjectId]
 });
 
 exports.userSchema = new Schema({
@@ -26,6 +26,7 @@ exports.userSchema = new Schema({
 });
 
 exports.serviceSchema = new Schema({
+	supplier_id:Schema.Types.ObjectId,
 	name:String,
 	keyWords:[String],
 	total_app:{type:Number,default:0},
@@ -33,7 +34,7 @@ exports.serviceSchema = new Schema({
 	begin_time:String,		//example:'8:00' means service begin at 8:00  every day
 	end_time:String,		//example:'17:00' means service end at 17:00 every day
 	slot_length:String,	//example:'1',a whole day spilts by 1h : 8:00~9:00,9:00~10:00
-	max_num:{type:Number,default:5},	//example:10,the max appointments can be made in one period
+	max_num:Number,	//example:10,the max appointments can be made in one period
 	desc:String
 });
 

@@ -30,7 +30,7 @@ var user = {
 // 	if (err) {
 // 		console.log(err);
 // 	} else {
-// 		console.log(user.userName);
+// 		console.log(doc.userName);
 // 	}
 // });
 
