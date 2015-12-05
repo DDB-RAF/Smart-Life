@@ -4,20 +4,20 @@ var service ={
 	name:'save money',
 	keyWords:['bank','open card'],
 	weeks:[1,2,3,4,5],
-	begin_time:'8:00',
+	begin_time:'08:00',
 	end_time:'17:00',
-	slot_length:'1h',
+	slot_length:0.5,
 	max_num:5,
 	desc:'save money'
 };
 
-// serviceDAO.add(service,function(err){
-// 	if(err){
-// 		console.log(err);
-// 	}else{
-// 		console.log('success');
-// 	}
-// });
+serviceDAO.add(service,function(err){
+	if(err){
+		console.log(err);
+	}else{
+		console.log('success');
+	}
+});
 // service._id = '565f0ecbdf7eb8ac15ea667e';
 // serviceDAO.findById(service._id,function(err,doc){
 // 	console.log(doc.desc);
@@ -30,12 +30,12 @@ var service ={
 // 	}
 // })
 
-serviceDAO.queryBySupplierId(service.supplier_id,function(err,docs){
-	if(err){
-		console.log(err);
-	}else{
-		console.log(docs);
-	}
-});
+// serviceDAO.queryBySupplierId(service.supplier_id,function(err,docs){
+// 	if(err){
+// 		console.log(err);
+// 	}else{
+// 		console.log(docs);
+// 	}
+// });
 
 

@@ -11,3 +11,10 @@ findById(id,callback);
 deleteById(id,callback);
 updateSupplier(supplier,callback);
 
+service:
+add(service,callback);
+findById(id,callback);
+deleteById(id,callback);
+queryBySupplierId(id,callback);
+
+
