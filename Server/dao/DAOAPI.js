@@ -17,4 +17,10 @@ findById(id,callback);
 deleteById(id,callback);
 queryBySupplierId(id,callback);
 
+timeTable:
+add(timeTable,callback);
+findById(id,callback);
+deleteById(id,callback);
+findSlotById(timeTable_id,slot_id,callback);
+
 

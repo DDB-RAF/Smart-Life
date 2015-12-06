@@ -66,3 +66,46 @@ exports.deleteById = function(id,callback){
 	});
 };
 
+/**
+ * input:
+ * 	timeTable_id:ObjectId
+ * 	slot_id:ObjectId
+ * callback(err,doc)
+ */	
+exports.findSlotById = function(timeTable_id,slot_id,callback){
+	TimeTableModel.findOne({_id:timeTable_id},function(err,doc){
+		if(err){
+			callback(err);
+		}else{
+			var slot = doc.tables.id(slot_id);
+			callback(err,slot);
+		}
+	});
+};
+
+/**
+ * input:
+ * timeTable_id:ObjectId,
+ * slot = {
+ * 		_id:ObjectId,
+ * 		app_num:Number,
+ * 		finished_num:Number
+ * }
+ * callback(err)
+ */
+exports.updateSlotById = function(timeTable_id,slot,callback){
+	TimeTableModel.findOne({_id:timeTable_id},function(err,doc){
+		if(err){
+			callback(err);
+		}else{
+			var s = doc.tables.id(slot._id);
+			s.app_num = slot.app_num;
+			s.finished_num = slot.finished_num;
+			doc.save(function(err){
+				callback(err);
+			});
+		}
+	});
+};
+
+
