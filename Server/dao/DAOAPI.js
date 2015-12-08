@@ -22,5 +22,5 @@ add(timeTable,callback);
 findById(id,callback);
 deleteById(id,callback);
 findSlotById(timeTable_id,slot_id,callback);
-
+updateSlotById(timeTable_id,slot,callback);
 

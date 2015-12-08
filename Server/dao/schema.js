@@ -53,10 +53,11 @@ exports.timeTableSchema = new Schema({
 
 exports.appointmentSchema = new Schema({
 	user_id:Schema.Types.ObjectId,
-	slotSchema_id:Schema.Types.ObjectId,
+	slot_id:Schema.Types.ObjectId,
 	timeTable_id:Schema.Types.ObjectId,
-	desc:String,
-	comment:String
+	status:{type:Number,default:0}, //0:not finished,1:finished,2:commented
+	comment:{type:String,default:''}
 });
+
 
 
