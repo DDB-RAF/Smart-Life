@@ -1,0 +1,67 @@
+/*
+    Document   : main
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root {
+    display: block;
+}
+
+header {
+	position: relative;
+	width: 90%;
+	left:5%;
+	top:10px;
+	background-color: blue;
+}
+
+header.#title {
+  position: relative;
+  width: 20%;
+  height: 50px;
+}
+
+header.#searchBar {
+  position: relative;
+  width: 30%;
+  height: 50px;
+}
+
+header.#accountManagement {
+  position: relative;
+  right: 5px;
+  top: 5px;
+  width: 30%;
+  height: 40px;
+}
+
+main {
+  position: relative;
+  width: 90%;
+  left: 5%;
+  top: 5px;
+  background-color: red;
+  height: 500px;
+}
+
+main.#parameters {
+  position: relative;
+  width: 30%;
+  height: 100%;
+  background-color: orange;
+}
+
+main.#displayList {
+  position: relative;
+  width: 30%;
+  height: 100%;
+  background-color: red;
+}
+
+main.#description {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  background-color: orange;
+}
