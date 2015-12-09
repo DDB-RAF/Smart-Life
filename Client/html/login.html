@@ -1,48 +1,38 @@
 <!DOCTYPE html>
-<meta charset=“UTF-8”/>
 <html>
-  <script src=”/Client/js/main.js”></script>
-
-  <link rel=“stylesheet” href=“/Client/css/style.css”/>
-
+  <head>
+    <meta charset="UTF-8"/>
+    <title>SMART LIFE</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="../libs/materialize/css/materialize.min.css"/>
+  </head>
   <body>
-    <header role="heading">
-      <div id="title">
-      </div>
-
-      <div id="searchBar">
-      </div>
-
-      <div id="accountManagement">
-      </div>
-    </header>
-
-    <nav>
-    </nav>
-
-    <main role="main">
-      <div id="loginInformations">
-        <div id="usernameBox">
-          <p id="usernameWord">Username</p>
-
-          <input placeholder="Your username">
+    <div class="container">
+      <main role="main">
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="username" type="text" class="validate">
+                <label for="username">Username</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+              </div>
+            </div>
+            <div class="row center-align">
+                <a class="waves-effect waves-light btn" type="submit">Sign in</a>
+                <br>
+                <a href="register.html">Not registered ? Create an account.</a>
+            </div>
+          </form>
         </div>
-
-        <div id="passwordBox">
-          <p id="passwordWord">Username</p>
-
-          <input placeholder="Your password">
-        </div>
+      </main>
       </div>
-
-      <div id="goBox">
-        <div id="goButton">
-          <p id="goWord">Connect</p>
-        </div>
-      </div>
-    </main>
-
-    <footer>
-    </footer>
+    <script type="text/javascript" src="../libs/JQuery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../libs/materialize/js/materialize.min.js"></script>
   </body>
 </html>

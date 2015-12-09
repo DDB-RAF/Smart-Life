@@ -1,42 +1,52 @@
 <!DOCTYPE html>
-<meta charset=“UTF-8”/>
 <html>
-  <script src=”/Client/js/main.js”></script>
-
-  <link rel=“stylesheet” href=“/Client/css/style.css”/>
-
+  <head>
+    <meta charset="UTF-8"/>
+    <title>SMART LIFE</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="../libs/materialize/css/materialize.min.css"/>
+  </head>
   <body>
-    <header role="heading">
-      <div id="title">
-      </div>
-
-      <div id="searchBar">
-      </div>
-
-      <div id="accountManagement">
-      </div>
-    </header>
-
-    <nav>
-    </nav>
-
-    <main role="main">
-      <section id="registerBox">
-        <div id="title">
+    <div class="container">
+      <main role="main">
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="email" type="email" class="validate">
+                <label for="email">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="username" type="text" class="validate">
+                <label for="username">Username</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="switch">
+                <label>
+                  Supplier :
+                  <input type="checkbox">
+                  <span class="lever"></span>
+                </label>
+              </div>
+              <div>
+                <br><br>
+                <a class="waves-effect waves-light btn" type="submit">Register</a>
+              </div>
+            </div>
+          </form>
         </div>
-
-        <div id="registerInformations">
-          <div id="name"></div>
-          <div id="password"></div>
-          <div id="mail"></div>
-          <div id="studentID"></div>
-          <div id="phone"></div>
-          <div id=""></div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-    </footer>
+      </main>
+      </div>
+    <script type="text/javascript" src="../libs/JQuery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../libs/materialize/js/materialize.min.js"></script>
   </body>
 </html>
