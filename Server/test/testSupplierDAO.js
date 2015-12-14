@@ -9,7 +9,7 @@ var supplier = {
   	classification:"bank"
 };
 
-// supplierDAO.add(supplier,function(err){
+// supplierDAO.add(supplier,function(err,doc){
 // 	if(err){
 // 		console.log(err);
 // 	}else{

@@ -5,7 +5,7 @@ var timeTable = {
 	date:new Date()
 };
 
-// timeTableDAO.add(timeTable,function(err){
+// timeTableDAO.add(timeTable,function(err,doc){
 // 	if(err){
 // 		console.log(err);
 // 	}else{

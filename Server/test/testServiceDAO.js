@@ -10,7 +10,7 @@ var service ={
 	desc:'save money'
 };
 
-serviceDAO.add(service,function(err){
+serviceDAO.add(service,function(err,doc){
 	if(err){
 		console.log(err);
 	}else{

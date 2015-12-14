@@ -14,7 +14,7 @@ var SupplierModel = db.mongoose.model('supplier',schema.supplierSchema);
  * 		desc:String,
  * 		classification:String
  * }
- * callback(err):
+ * callback(err,doc):
  * 		err == null : success
  */
 exports.add = function(supplier,callback){
@@ -36,7 +36,7 @@ exports.add = function(supplier,callback){
 					classification:supplier.classification
 				});
 				s.save(function(err){
-					callback(err);
+					callback(err,s);
 				});
 			}
 		}

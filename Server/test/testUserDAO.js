@@ -8,7 +8,7 @@ var user = {
 	phone: '188'
 };
 
-// userDAO.add(user, function (err) {
+// userDAO.add(user, function (err,doc) {
 // 	if (err) {
 // 		console.log(err);
 // 	} else {

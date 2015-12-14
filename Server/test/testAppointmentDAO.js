@@ -6,7 +6,7 @@ var appointment = {
 	slot_id:'56624d460579a19820937509'
 };
 
-// appointmentDAO.add(appointment,function(err){
+// appointmentDAO.add(appointment,function(err,doc){
 // 	if(err){
 // 		console.log(err);
 // 	}else{

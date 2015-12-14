@@ -10,9 +10,10 @@ var AppointmentModel = db.mongoose.model('appointment',schema.appointmentSchema)
  * 		slot_id:ObjectId,
  * 		timeTable_id:ObjectId
  * }
- * callback(err)
+ * callback(err,a)
+ * attention:need to updae the slot
  */
-exports.add = function(appointment,callback){
+exports.add = function(appointment,callback){ 
 	AppointmentModel.findOne({user_id:appointment.user_id,slot_id:appointment.slot_id},function(err,doc){
 		if(err){
 			callback(err);
@@ -27,7 +28,7 @@ exports.add = function(appointment,callback){
 					timeTable_id:appointment.timeTable_id
 				});
 				a.save(function(err){
-					callback(err);
+					callback(err,a);
 				});
 			}
 		}
@@ -49,6 +50,7 @@ exports.findById = function(id,callback){
  * input:
  * 		id:ObjectId
  * callback(err)
+ * attenstion:need to update the slot
  */
 exports.deleteById = function(id,callback){
 	AppointmentModel.findByIdAndRemove(id,function(err){
@@ -64,6 +66,7 @@ exports.deleteById = function(id,callback){
  * 		comment:string
  * }
  * callback(err)
+ * attention:need to update the slot
  */
 exports.updateById = function(appointment,callback){
 	AppointmentModel.findOne({_id:appointment._id},function(err,doc){

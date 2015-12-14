@@ -15,7 +15,8 @@ var ServiceModel = db.mongoose.model('service',schema.serviceSchema);
  *		max_num:{type:Number,default:5},	//example:10,the max appointments can be made in one period
  *		desc:String
  * }
- * 
+ * output:
+ * 		callback(err,doc)
  */
 exports.add = function(service,callback){
 	var s = new ServiceModel({
@@ -30,7 +31,7 @@ exports.add = function(service,callback){
 		desc:service.desc
 	});
 	s.save(function(err){
-		callback(err);
+		callback(err,s);
 	});
 };
 

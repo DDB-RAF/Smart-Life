@@ -12,7 +12,7 @@ var UserModel = db.mongoose.model('user', schema.userSchema);
  * 		email:String,
  * 		phone:String
  * 	}
- * callback(err):
+ * callback(err,doc):
  * 		err==null:success
  * 		err!=null:UserExits
  */
@@ -33,7 +33,7 @@ exports.add = function (user, callback) {
 					phone: user.phone
 				});
 				u.save(function (err) {
-					callback(err);
+					callback(err,u);
 				});
 			}
 		}

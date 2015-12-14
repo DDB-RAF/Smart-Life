@@ -12,7 +12,7 @@ var serviceDAO = require('./serviceDAO.js');
  * 		service_id:	Schema.Types.ObjectId,
  * 		date:Schema.Types.Date
  * }
- * callback(err)
+ * callback(err,doc)
  */
 exports.add = function(timeTable,callback){
 	serviceDAO.findById(timeTable.service_id,function(err,doc){
@@ -38,7 +38,7 @@ exports.add = function(timeTable,callback){
 				tables:slots
 			});
 			tTable.save(function(err){
-				callback(err);
+				callback(err,tTable);
 			});
 		}
 	});

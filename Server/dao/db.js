@@ -4,4 +4,3 @@ var config = {
 	dbName:'test'	
 };
 exports.mongoose = mon.connect('mongodb://'+config.host+'/'+config.dbName);
-

@@ -1,34 +1,76 @@
 var userDAO = require('../dao/userDAO.js');
 var supplierDAO = require('../dao/supplierDAO.js');
 var serviceDAO = require('../dao/serviceDAO.js');
+var timeTableDAO =require('../dao/timeTableDAO.js');
 
-var user = {
-	userName: 'zhangfei',
-	passWord: 'zhagnfei',
-	name: 'Fly zhang',
-	email: 'zhangfei614@126.com',
-	phone: '188'
-};
-var supplier = {
-	userName: 'bankofchina',
-	passWord: '123',
-	name: "bank of china",
-  	email: "zhangfei614@126.com",
-  	phone: "155",
-  	desc: "zhangfei",
-  	classification:"bank"
-};
-var service ={
-	supplier_id:'566e2d9ad07c3c981e02f1ca',
-	name:'save money',
-	weeks:[1,2,3,4,5],
-	begin_time:'08:00',
-	end_time:'17:00',
-	slot_length:0.5,
-	max_num:5,
-	desc:'save money'
-};
-var timeTable = {
-	service_id:'56619eb0b149f37822c1095f',
-	date:new Date()
-};
+
+
+
+for (var i = 0; i < 3; i++) {
+	var user = {
+		userName: 'zhangfei' + i,
+		passWord: 'zhagnfei',
+		name: 'Fly zhang',
+		email: 'zhangfei614@126.com',
+		phone: '188'
+	};
+	userDAO.add(user, function (err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log("add user success");
+		}
+	});
+
+	var supplier = {
+		userName: 'boc' + i,
+		passWord: 'boc',
+		name: "bank of china",
+		email: "zhangfei614@126.com",
+		phone: "155",
+		desc: "zhangfei",
+		classification: "bank"
+	};
+
+	supplierDAO.add(supplier, function (err, doc) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('add supplier success');
+			for (var i = 0; i < 2; i++) {
+				var service = {
+					supplier_id: doc._id,
+					name: 'save money' + i,
+					weeks: [1, 2, 3, 4, 5],
+					begin_time: '08:00',
+					end_time: '17:00',
+					slot_length: 0.5,
+					max_num: 5,
+					desc: 'save money'
+				};
+				serviceDAO.add(service, function (err, d) {
+					if (err) {
+						console.log(err);
+					} else {
+						console.log("add service in " + doc.userName)
+						for (var i = 0; i < 5; i++) {
+							var t = new Date();
+							t.setDate(t.getDate()+i);
+							var timeTable = {
+								service_id: d._id,
+								date:t
+							};
+							timeTableDAO.add(timeTable,function(err,t){
+								if(err){
+									console.log(err);
+								}else{
+									console.log("add timetabe in "+d.name);
+								}
+							});
+						}
+					}
+				});
+			};
+		}
+	});
+}
