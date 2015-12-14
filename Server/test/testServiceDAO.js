@@ -1,8 +1,7 @@
 var serviceDAO = require('../dao/serviceDAO.js');
 var service ={
-	supplier_id:'565ef2317232a0801d91fae2',
+	supplier_id:'566e2d9ad07c3c981e02f1ca',
 	name:'save money',
-	keyWords:['bank','open card'],
 	weeks:[1,2,3,4,5],
 	begin_time:'08:00',
 	end_time:'17:00',

@@ -8,7 +8,6 @@ var ServiceModel = db.mongoose.model('service',schema.serviceSchema);
  * service:{
  * 		supplier_id:Schema.Types.ObjectId,
  *		name:String,
- *		keyWords:[String],
  *		weeks:[Number],			//example:[1,5] means service can be accessed at Mon. Fri.
  *		begin_time:String,		//example:'8:00' means service begin at 8:00  every day
  *		end_time:String,		//example:'17:00' means service end at 17:00 every day
@@ -22,7 +21,7 @@ exports.add = function(service,callback){
 	var s = new ServiceModel({
 		supplier_id:service.supplier_id,
 		name:service.name,
-		keyWords:service.keyWords,
+		//keyWords:service.keyWords,
 		weeks:service.weeks,
 		begin_time:service.begin_time,
 		end_time:service.end_time,
