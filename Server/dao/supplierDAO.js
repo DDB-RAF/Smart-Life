@@ -28,7 +28,7 @@ exports.add = function(supplier,callback){
 			}else{
 				var s = new SupplierModel({
 					userName:supplier.userName,
-					password:supplier.passWord,
+					passWord:supplier.passWord,
 					name:supplier.name,
 					email:supplier.email,
 					phone:supplier.phone,

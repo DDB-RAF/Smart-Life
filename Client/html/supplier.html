@@ -34,7 +34,7 @@
 		</div>
 		<div id="container">
 			<!--If choose the myInfo -->
-			<!--<form class="col s9">
+			<form class="col s9">
 				<div class="row">
 					<div class="input-field col s6">
 						<i class="material-icons prefix">account_circle</i>
@@ -45,8 +45,8 @@
 				<div class="row">
 					<div class="input-field col s6">
 						<i class="material-icons prefix">vpn_key</i>
-						<input id="password" type="password" class="validate">
-						<label class="active" for="password">Password</label>
+						<input id="passWord" type="password" class="validate">
+						<label class="active" for="passWord">Password</label>
 					</div>
 				</div>
 				<div class="row">
@@ -73,7 +73,7 @@
 				<div class="row">
 					<div class="input-field col s6">
 						<select id="classification">
-							<option value="" disabled selected>Choose your classification</option>
+							<!--<option value="" disabled selected>Choose your classification</option>-->
 							<option value="school">school</option>
 							<option value="bank">bank</option>
 							<option value="hospital">hospital</option>
@@ -88,11 +88,11 @@
 					</div>
 				</div>
 				<div class="row col s6">
-					<a class="waves-effect waves-light btn right">Stuff</a>
+					<a class="waves-effect waves-light btn right">Update</a>
 				</div>
-			</form>-->
+			</form>
 			<!-- If choice a service -->
-			<form class="col s9">
+			<!--<form class="col s9">
 				<div class="row">
 					<div class="input-field col s4">
 						<input disabled id="name" value="Open a card" type="text" class="validate">
@@ -176,7 +176,7 @@
 				<div class="row">
 					<a class="waves-effect waves-light btn">Delete this service</a>
 				</div>
-			</form>
+			</form>-->
 			<!-- If choice to add a service -->
 			<!--<form class="col s9">
 				<div class="row">
@@ -236,11 +236,7 @@
 </body>
 <script type="text/javascript" src="../libs/JQuery/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="../libs/materialize/js/materialize.min.js"></script>
-<script>
-	$(document).ready(function() {
-    $('select').material_select();
-});
-
-</script>
+<script type="text/javascript" src="../libs/JQuerySession/jquerysession.js"></script>
+<script type="text/javascript" src="../js/supplier.js"></script>
 
 </html>

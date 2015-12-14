@@ -42,8 +42,16 @@ app.get('/', function (req, res) {
 
 });
 
+//add supplier route
+var supplier = require('./routers/supplierRouter.js');
+app.use('/supplier',supplier);
+
+
+
 app.set('host', '127.0.0.1');
 
+// to make the files in Client avaliable
+app.use(express.static(__dirname+'\\..\\Client'));
 var server = app.listen(8080, function () {
 	var host = server.address().address;
 	var port = server.address().port;
