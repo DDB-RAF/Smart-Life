@@ -1,29 +1,50 @@
 <!DOCTYPE html>
-<meta charset=“UTF-8”/>
 <html>
-  <script src=”/Client/js/main.js”></script>
-
-  <link rel=“stylesheet” href=“/Client/css/style.css”/>
-
+  <head>
+    <meta charset="UTF-8"/>
+    <title>SMART LIFE</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="../libs/materialize/css/materialize.min.css"/>
+  </head>
   <body>
-    <header role="heading">
-      <div id="title">
+    <div class="container">
+      <main role="main">
+        <div class="row">
+          <div class="col s12 m6">
+            <div class="card blue lighten-1">
+              <div class="card-content white-text">
+                <span class="card-title">Account informations</span>
+                <p>Type : </p>
+                <p>Username : </p>
+                <p>Email : </p>
+                <P>Phone number : </P>
+              </div>
+              <div class="card-action">
+                <span class="white-text" style="margin-right:20px;">EDIT : </span>
+                <a href="#">Email</a>
+                <a href="#">Phone number</a>
+                <a href="#">Password</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header">Appointment 28/12/2015</div>
+            <div class="collapsible-body"><p>Type : Bank appointment</p><p>Place : Bank of China, Bldg C</p><p><a href="#">Cancel my appointment</a></p></div>
+          </li>
+          <li>
+            <div class="collapsible-header">Appointment 13/12/2015</div>
+            <div class="collapsible-body"><p>Type : Meeting</p><p>Place : Jazz coffee</p><p><a href="#">Cancel my appointment</a></p></div>
+          </li>
+          <li>
+            <div class="collapsible-header">Appointment 01/01/1900</div>
+            <div class="collapsible-body"><p>Type : New millenium</p><p>Place : Earth</p><p><a href="#">Cancel my appointment</a></p></div>
+          </li>
+        </ul>
+      </main>
       </div>
-
-      <div id="searchBar">
-      </div>
-
-      <div id="accountManagement">
-      </div>
-    </header>
-
-    <nav>
-    </nav>
-
-    <main role="main">
-    </main>
-
-    <footer>
-    </footer>
+    <script type="text/javascript" src="../libs/JQuery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../libs/materialize/js/materialize.min.js"></script>
   </body>
 </html>
