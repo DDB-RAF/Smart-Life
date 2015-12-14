@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=“UTF-8”/>
+	<title>SMART LIFE</title>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" type="text/css" href="../libs/materialize/css/materialize.min.css" />
+</head>
+
+<body>
+
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#" class="brand-logo">Smart Life</a>
+			<ul class="right hide-on-med-and-down">
+				<li>
+					<a>Suppliers</a>
+				</li>
+				<li>
+					<a>Log out</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<form class="col s8">
+			<div class="row">
+				<div class="input-field col s4">
+					<input disabled id="name" value="Open a card" type="text" class="validate">
+					<label class="active" for="name">Name</label>
+				</div>
+				<div class="input-field col s4">
+					<input disabled id="total_app" value="10" type="text" class="validate">
+					<label class="active" for="total_app">Total appointments:</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s4">
+					<input disabled id="begin_time" value="08:00" type="text" class="validate">
+					<label class="active" for="begin_time">Begin Time</label>
+				</div>
+				<div class="input-field col s4">
+					<input disabled id="end_time" value="17:00" type="text" class="validate">
+					<label class="active" for="end_time">End Time</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s4">
+					<input disabled id="slot_length" value="0.5" type="text" class="validate">
+					<label class="active" for="slot_length">Slot length</label>
+				</div>
+				<div class="input-field col s4">
+					<input disabled id="max_num" value="5" type="text" class="validate">
+					<label class="active" for="max_num">Max num</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="chip">
+					Mon.
+				</div>
+				<div class="chip">
+					Tues.
+				</div>
+				<div class="chip">
+					Wed.
+				</div>
+				<div class="chip">
+					Thur.
+				</div>
+				<div class="chip">
+					Fri.
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<textarea disabled id="textarea" class="materialize-textarea"></textarea>
+					<label class="active" for="textarea">Description</label>
+				</div>
+			</div>
+			<div class="row" id="timetable_row">
+				<table class="col s9 centered bordered">
+					<thead>
+						<tr>
+							<th>slots</th>
+							<th>12-13</th>
+							<th>12-14</th>
+							<th>12-15</th>
+							<th>12-16</th>
+							<th>12-17</th>
+							<th>12-18</th>
+							<th>12-19</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td>10:00~11:00</td>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td class="red">4</td>
+							<td>5</td>
+							<td>6</td>
+							<td>7</td>
+						</tr>
+						<tr>
+							<td>11:00~12:00</td>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+							<td class="red">6</td>
+							<td>7</td>
+						</tr>
+						<tr>
+							<td>12:00~13:00</td>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td class="red">5</td>
+							<td>6</td>
+							<td>7</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+</body>
+
+<script type="text/javascript" src="../libs/JQuery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../libs/materialize/js/materialize.min.js"></script>
+</html>
