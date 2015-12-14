@@ -12,9 +12,7 @@ var SupplierModel = db.mongoose.model('supplier',schema.supplierSchema);
  * 		email:String,
  * 		phone:String,
  * 		desc:String,
- * 		classification:{
- * 			name:String
- * 		}
+ * 		classification:String
  * }
  * callback(err):
  * 		err == null : success
@@ -35,10 +33,7 @@ exports.add = function(supplier,callback){
 					email:supplier.email,
 					phone:supplier.phone,
 					desc:supplier.desc,
-					classification:{
-						name:supplier.classification.name
-					},
-					services:[]
+					classification:supplier.classification
 				});
 				s.save(function(err){
 					callback(err);

@@ -9,9 +9,7 @@ exports.supplierSchema = new Schema({
 	email:String,
 	phone:String,
 	desc:String,
-	classification:{ //need to change directly
-		name:String
-	}
+	classification:String
 	// services:[Schema.Types.ObjectId]
 });
 
@@ -28,7 +26,7 @@ exports.userSchema = new Schema({
 exports.serviceSchema = new Schema({
 	supplier_id:Schema.Types.ObjectId,
 	name:String,
-	keyWords:[String],	//delete
+	//keyWords:[String],	//delete
 	total_app:{type:Number,default:0},
 	weeks:[Number],			//example:[1,5] means service can be accessed at Mon. Fri.
 	begin_time:String,		//example:'08:00' means service begin at 08:00  every day

@@ -6,20 +6,18 @@ var supplier = {
   	email: "zhangfei614@126.com",
   	phone: "155",
   	desc: "zhangfei",
-  	classification: {
-		name: "bank"
-  	}
+  	classification:"bank"
 };
 
-supplierDAO.add(supplier,function(err){
-	if(err){
-		console.log(err);
-	}else{
-		console.log('success');
-	}
-});
+// supplierDAO.add(supplier,function(err){
+// 	if(err){
+// 		console.log(err);
+// 	}else{
+// 		console.log('success');
+// 	}
+// });
 
-// supplier._id = '565ef0325422bae41f7e60f9';
+supplier._id = '566e2d9ad07c3c981e02f1ca';
 // supplierDAO.findById(supplier._id,function(err,doc){
 // 	if(err){
 // 		console.log(err);
@@ -28,14 +26,14 @@ supplierDAO.add(supplier,function(err){
 // 	}
 // });
 
-// supplier.phone='199';
-// supplierDAO.updateSupplier(supplier,function(err){
-// 	if(err){
-// 		console.log(err);
-// 	}else{
-// 		console.log('update success');
-// 	}
-// });
+supplier.phone='199';
+supplierDAO.updateSupplier(supplier,function(err){
+	if(err){
+		console.log(err);
+	}else{
+		console.log('update success');
+	}
+});
 
 // supplierDAO.deleteById(supplier._id,function(err){
 // 	if(err){
