@@ -6,7 +6,7 @@ $(document).ready(function () {
 	
 	//for test,to use a exsiting supplier
 	var supplier = {
-		"_id": "566ec4ecf13dad302645a06f",
+		"_id": "566ee3b8b46fe7781a0f77e6",
 		"userName": "boc1",
 		"passWord": "boc",
 		"name": "bank of china",
@@ -28,4 +28,27 @@ $(document).ready(function () {
 	$("#phone").attr("value", supplier.phone);
 	$("#classification").prevAll("input").attr("value", supplier.classification);
 	$("#textarea").val(supplier.desc);
+
+	//load the services
+	$.ajax({
+		type: 'GET',
+		data: {
+			id: supplier._id
+		},
+		url: '/supplier/queryBySupplierId',
+		success: function (data) {
+			console.log(data);
+			for (s in data) {
+				$('<li/>',{
+					class:'collection-item',
+					html:data[s].name
+				}).appendTo("#serviceList");
+			}
+		}
+	});
+	
+	
+	
+	
+	
 });
