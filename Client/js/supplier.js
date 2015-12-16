@@ -1,3 +1,13 @@
+var updateSuppler = function(){
+		
+};
+
+var selectService = function(event){
+	console.log(event.target);
+	
+	$("#myinfoForm").hide();
+	
+};
 $(document).ready(function () {
     $('select').material_select();
 	
@@ -41,14 +51,12 @@ $(document).ready(function () {
 			for (s in data) {
 				$('<li/>',{
 					class:'collection-item',
-					html:data[s].name
-				}).appendTo("#serviceList");
+					html:data[s].name,
+					_id:data[s]._id,
+					style:"cursor:pointer"
+				}).click(selectService).appendTo("#serviceList");
 			}
 		}
 	});
-	
-	
-	
-	
 	
 });
