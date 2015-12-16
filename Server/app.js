@@ -44,8 +44,10 @@ app.get('/', function (req, res) {
 
 //add supplier route
 var supplier = require('./routers/supplierRouter.js');
-app.use('/supplier',supplier);
+var service = require('./routers/serviceRouter.js');
 
+app.use('/supplier',supplier);
+app.use('/service',service);
 
 
 app.set('host', '127.0.0.1');

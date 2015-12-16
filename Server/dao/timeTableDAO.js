@@ -108,4 +108,19 @@ exports.updateSlotById = function(timeTable_id,slot,callback){
 	});
 };
 
+/**
+ * input:
+ * 		id:service_id,
+ * 		d:Date
+ * callback(err,doc)
+ */
+
+exports.findByServiceIdAndDate = function(id,d,callback){
+	var b = new Date(d);
+	d.setDate(d.getDate()+1);
+	TimeTableModel.findOne({service_id:id,date:{$gte:b,$lt:d}},function(err,doc){
+		callback(err,doc,b);
+	})
+};
+
 

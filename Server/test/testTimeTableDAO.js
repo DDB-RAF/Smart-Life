@@ -30,12 +30,16 @@ var slot_id = '56624d460579a19820937509';
 // 		console.log(doc);
 // 	}
 // });
-var slot = {
-	_id:slot_id,
-	app_num:10,
-	finished_num:5
-};
-timeTableDAO.updateSlotById(timeTable_id,slot,function(err){
-	console.log(err);
+// var slot = {
+// 	_id:slot_id,
+// 	app_num:10,
+// 	finished_num:5
+// };
+// timeTableDAO.updateSlotById(timeTable_id,slot,function(err){
+// 	console.log(err);
+// });
+
+timeTableDAO.findByServiceIdAndDate("566ec4ecf13dad302645a073",new Date('2015-12-16'),function(err,doc){
+	console.log(doc.date);
 });
 
