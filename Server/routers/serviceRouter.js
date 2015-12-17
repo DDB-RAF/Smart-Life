@@ -56,6 +56,9 @@ router.get('/queryById', function (req, res, next) {
 							});
 						}
 						if (RECENT_DAYS <= 0) {
+							timeTable.sort(function(a,b){
+								return a.date.getTime()-b.date.getTime()
+							});
 							var result = {
 								service:doc,
 								timeTable:timeTable
