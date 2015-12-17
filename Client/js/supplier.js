@@ -3,7 +3,19 @@ var updateSuppler = function(){
 };
 
 var selectService = function(event){
-	console.log(event.target);
+	var service_id = $(event.target).attr('_id');
+	var date = new Date().toJSON().slice(0,10);
+	$.ajax({
+		type:'GET',
+		url:'/service/queryById',
+		data:{
+			id:service_id,
+			date:date
+		},
+		success:function(data){
+			console.log(data);
+		}
+	});
 	
 	$("#myinfoForm").hide();
 	
@@ -16,7 +28,7 @@ $(document).ready(function () {
 	
 	//for test,to use a exsiting supplier
 	var supplier = {
-		"_id": "566ec4ecf13dad302645a06f",
+		"_id": "566ee3b8b46fe7781a0f77e6",
 		"userName": "boc1",
 		"passWord": "boc",
 		"name": "bank of china",
@@ -47,7 +59,7 @@ $(document).ready(function () {
 		},
 		url: '/service/queryBySupplierId',
 		success: function (data) {
-			console.log(data);
+			// console.log(data);
 			for (s in data) {
 				$('<li/>',{
 					class:'collection-item',
