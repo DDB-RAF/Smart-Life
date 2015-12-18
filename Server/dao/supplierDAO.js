@@ -83,7 +83,8 @@ exports.updateSupplier = function(supplier,callback){
 		if(err){
 			callback(err);
 		}else{
-			doc.passWord = supplier.passWord;
+			if(supplier.passWord != undefined)
+				doc.passWord = supplier.passWord;
 			doc.name = supplier.name;
 			doc.email = supplier.email;
 			doc.phone = supplier.phone;

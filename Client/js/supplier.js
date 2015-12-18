@@ -1,5 +1,41 @@
-var updateSuppler = function () {
-
+var updateSupplier = function () {
+	var passWord = $('#passWord').val();
+	var name = $('#name').val();
+	var email = $('#email').val();
+	var phone = $('#phone').val();
+	var classification = $('#classification').val();
+	var desc = $('textarea').val();
+	var s = {};
+	if (passWord != "") s['passWord'] = passWord;
+	if (name != "") s['name'] = name;
+	if (email != "") s['email'] = email;
+	if (phone != "") s['phone'] = phone;
+	if (classification != "") s['classification'] = classification;
+	if (desc != "") s['desc'] = desc;
+	var supplier = JSON.parse($.session.get('supplier'));
+	s['_id'] = supplier._id;
+	$.ajax({
+		type: 'POST',
+		url: '/supplier/update',
+		data: {
+			supplier: s
+		},
+		success: function (data) {
+			Materialize.toast(data, 3000, '', function () {
+				$.ajax({
+					type: 'GET',
+					url: '/supplier/queryById',
+					data: {
+						id: s['_id']
+					},
+					success: function (data) {
+						$.session.set("supplier", JSON.stringify(data));
+						window.location.href = window.location.href;
+					}
+				})
+			});
+		}
+	});
 };
 
 
@@ -14,68 +50,86 @@ var selectService = function (event) {
 			date: date
 		},
 		success: function (data) {
-			console.log(data);
 			var service = data.service;
 			var timeTable = data.timeTable;
+			$('#service_id').attr("value", service._id);
 			$('#service_name').attr("value", service.name).nextAll('label').addClass('active');
 			$('#total_app').attr("value", service.total_app).nextAll('label').addClass('active');
-			$('#begin_time').attr("value",service.begin_time).nextAll('label').addClass('active');
-			$('#end_time').attr("value",service.end_time).nextAll('label').addClass('active');
-			$('#slot_length').attr("value",service.slot_length).nextAll('label').addClass('active');
-			$('#max_num').attr("value",service.max_num).nextAll('label').addClass('active');
+			$('#begin_time').attr("value", service.begin_time).nextAll('label').addClass('active');
+			$('#end_time').attr("value", service.end_time).nextAll('label').addClass('active');
+			$('#slot_length').attr("value", service.slot_length).nextAll('label').addClass('active');
+			$('#max_num').attr("value", service.max_num).nextAll('label').addClass('active');
 			$('#myinfoForm').hide();
 			$('#serviceForm').show();
 			
 			//fill the timeTable head
 			$('#timeTable thead tr').empty();
-			$('<th/>',{html:'slots'}).appendTo('#timeTable thead tr');
-			for(i=0;i<timeTable.length;i++){
-				$('<th/>',{
-					html:timeTable[i].date.slice(5,10)
+			$('<th/>', { html: 'slots' }).appendTo('#timeTable thead tr');
+			for (i = 0; i < timeTable.length; i++) {
+				$('<th/>', {
+					html: timeTable[i].date.slice(5, 10)
 				}).appendTo('#timeTable thead tr');
 			}
 			
 			//fill the timeTable
 			$('#timeTable tbody').empty();
-			for(i=0;i<timeTable[0].tables.length;i++){
+			for (i = 0; i < timeTable[0].tables.length; i++) {
 				var tr = $('<tr/>');
-				var btime = timeTable[0].tables[i].begin_time.slice(11,16);
-				var etime = timeTable[0].tables[i].end_time.slice(11,16)
-				$('<td/>',{
-					html:btime+"~"+etime
+				var btime = timeTable[0].tables[i].begin_time.slice(11, 16);
+				var etime = timeTable[0].tables[i].end_time.slice(11, 16)
+				$('<td/>', {
+					html: btime + "~" + etime
 				}).appendTo(tr);
-				for(j=0;j<timeTable.length;j++){
-					$('<td/>',{
-						html:'<b>A:'+timeTable[j].tables[i].app_num+'</b><br/>'
-						+'<b>F:'+timeTable[j].tables[i].finished_num+'</b>'
+				for (j = 0; j < timeTable.length; j++) {
+					$('<td/>', {
+						html: '<b>A:' + timeTable[j].tables[i].app_num + '</b><br/>'
+						+ '<b>F:' + timeTable[j].tables[i].finished_num + '</b>'
 					}).appendTo(tr);
 				}
 				tr.appendTo('#timeTable tbody');
 			}
 		}
 	});
+};
 
-
+var deleteService = function (event) {
+	var id = $('#service_id').attr("value");
+	$.ajax({
+		type: 'GET',
+		url: '/service/deleteById',
+		data: {
+			id: id
+		},
+		success: function (data) {
+			Materialize.toast(data, 3000, '', function () {
+				window.location.href = window.location.href;
+			});
+		}
+	})
 };
 $(document).ready(function () {
     $('select').material_select();
 	
 	//get supplier in session,if can't get jump to login in.
-	var supplier = $.session.get('suppler');
+	var supplier = $.session.get('supplier');
 	
 	//for test,to use a exsiting supplier
-	var supplier = {
-		"_id": "566ec4ecf13dad302645a06f",
-		"userName": "boc1",
-		"passWord": "boc",
-		"name": "bank of china",
-		"email": "zhangfei614@126.com",
-		"phone": "155",
-		"desc": "zhangfei",
-		"classification": "bank",
-		"__v": 0
+	if (supplier == undefined) {
+		supplier = {
+			"_id": "566ee3b8b46fe7781a0f77e6",
+			"userName": "boc1",
+			"passWord": "boc",
+			"name": "bank of china",
+			"email": "zhangfei614@126.com",
+			"phone": "155",
+			"desc": "zhangfei",
+			"classification": "bank",
+			"__v": 0
+		}
+		$.session.set("supplier", JSON.stringify(supplier));
+	} else {
+		supplier = JSON.parse(supplier);
 	}
-
 	if (supplier == null || supplier == undefined) {
 		window.location.href = './login.html';
 	}
@@ -108,4 +162,14 @@ $(document).ready(function () {
 		}
 	});
 
+	//add updateSupplier event;
+	$('#myInfoCollection').click(function () {
+
+		$('#myinfoForm').show();
+		$('#serviceForm').hide();
+	});
+	$('#updateSupplier').click(updateSupplier);
+	
+	//add deleteService event
+	$('#delete_service').click(deleteService);
 });

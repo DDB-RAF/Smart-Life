@@ -33,7 +33,7 @@
 			</ul>-->
 			<ul class="collapsible" data-collapsible="accordion">
 				<li>
-					<div class="collapsible-header"><i class="material-icons">perm_identity</i>My info</div>
+					<div id="myInfoCollection" class="collapsible-header"><i class="material-icons">perm_identity</i>My info</div>
 				</li>
 				<li>
 					<div class="collapsible-header"><i class="material-icons">toc</i>My services</div>
@@ -103,11 +103,12 @@
 					</div>
 				</div>
 				<div class="row col s6">
-					<a class="waves-effect waves-light btn right">Update</a>
+					<a id="updateSupplier" class="waves-effect waves-light btn right">Update</a>
 				</div>
 			</form>
 			<!-- If choice a service -->
 			<form id="serviceForm" class="col s9" style="display:none">
+				<input id="service_id" type="hidden"/>
 				<div class="row">
 					<div class="input-field col s4">
 						<input disabled id="service_name" type="text" class="validate">
@@ -152,7 +153,7 @@
 					</table>
 				</div>
 				<div class="row">
-					<a class="waves-effect waves-light btn">Delete this service</a>
+					<a id="delete_service" class="waves-effect waves-light btn">Delete this service</a>
 				</div>
 			</form>
 			<!-- If choice to add a service -->

@@ -42,6 +42,11 @@ app.get('/', function (req, res) {
 
 });
 
+//add body-parser
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
 //add supplier route
 var supplier = require('./routers/supplierRouter.js');
 var service = require('./routers/serviceRouter.js');

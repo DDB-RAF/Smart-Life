@@ -15,6 +15,17 @@ router.get('/queryBySupplierId', function (req, res, next) {
 	});
 });
 
+router.get('/deleteById',function(req,res,next){
+	var id = req.query.id;
+	serviceDAO.deleteById(id,function(err){
+		if(err){
+			next(err);
+		}else{
+			res.send('Delete success');
+		}
+	});
+});
+
 router.get('/queryById', function (req, res, next) {
 	var id = req.query.id;
 	var date = new Date(req.query.date);
