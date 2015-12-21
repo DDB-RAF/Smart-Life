@@ -21,7 +21,7 @@ var updateSupplier = function () {
             supplier: s
         },
         success: function (data) {
-            Materialize.toast(data, 3000, '', function () {
+            Materialize.toast(data, 1000, '', function () {
                 $.ajax({
                     type: 'GET',
                     url: '/supplier/queryById',
@@ -30,7 +30,7 @@ var updateSupplier = function () {
                     },
                     success: function (data) {
                         $.session.set("supplier", JSON.stringify(data));
-                        window.location.href = window.location.href;
+                        window.location.reload();
                     }
                 })
             });
@@ -87,7 +87,8 @@ var selectService = function (event) {
                         html: '<b>A:' + timeTable[j].tables[i].app_num + '</b><br/>'
                         + '<b>F:' + timeTable[j].tables[i].finished_num + '</b>',
                         _id: timeTable[j].tables[i]._id,
-                        style: "cursor:pointer"
+                        style: "cursor:pointer",
+                        class:timeTable[j].tables[i].app_num - timeTable[j].tables[i].finished_num > timeTable[j].tables[i].app_num/2 ? "red" : "",
                     }).click(selectSlot).appendTo(tr);
                 }
                 tr.appendTo('#timeTable tbody');
@@ -105,8 +106,8 @@ var deleteService = function (event) {
             id: id
         },
         success: function (data) {
-            Materialize.toast(data, 3000, '', function () {
-                window.location.href = window.location.href;
+            Materialize.toast(data, 1000, '', function () {
+                window.location.reload();
             });
         }
     })
@@ -138,8 +139,8 @@ var addService = function (event) {
                 service: s
             },
             success: function (data) {
-                Materialize.toast(data, 3000, '', function () {
-                    window.location.href = window.location.href;
+                Materialize.toast(data, 1000, '', function () {
+                    window.location.reload();
                 });
             }
         });
@@ -147,8 +148,22 @@ var addService = function (event) {
         Materialize.toast("Please fill the form");
     }
 };
+var finishApp = function (event) {
+    var id = $(event.currentTarget).attr("_id");
+    $.ajax({
+        type: 'GET',
+        url: '/appointment/finishById',
+        data: {
+            id: id
+        },
+        success: function (data) {
+            Materialize.toast(data, 2000, '', function () {
+               fillUsers($('#app_users').attr("_id"));
+            });
+        }
+    });
+};
 var fillUsers = function (id) {
-    console.log(id);
     $.ajax({
         type: 'GET',
         url: '/appointment/queryBySlotId',
@@ -157,29 +172,31 @@ var fillUsers = function (id) {
         },
         success: function (data) {
             $('#app_users').empty();
-            console.log(data);
+            $('#app_users').attr("_id", id);
             for (s in data) {
-                var tr = $('</tr>');
-                $('</td>', { html: data[s].user_id.name }).appendTo(tr);
-                $('</td>', { html: data[s].user_id.email }).appendTo(tr);
-                $('</td>', { html: data[s].user_id.phone }).appendTo(tr);
-                if (data[s].user_id.status == 1) {
-                    $('</div>', {
-                        class: "waves-effect waves-light btn",
+                var tr = $('<tr/>');
+                $('<td/>', { html: data[s].user_id.name }).appendTo(tr);
+                $('<td/>', { html: data[s].user_id.email }).appendTo(tr);
+                $('<td/>', { html: data[s].user_id.phone }).appendTo(tr);
+                if (data[s].status == 0) {
+                    $('<div/>', {
+                        class: "btn",
+                        _id: data[s]._id,
                         html: "Finish"
-                    }).appendTo($('</td>').appendTo(tr));
+                    }).click(finishApp).appendTo($('<td/>').appendTo(tr));
+                } else {
+                    $('<td/>', { html: 'Finished' }).appendTo(tr);
                 }
                 tr.appendTo($('#app_users'));
             }
-            console.log($('#app_users').html());
         }
     });
 }
 var selectSlot = function (event) {
-    console.log(event.target);
-    fillUsers($(event.target).attr("_id"));
-    // $('#slotModal').openModal();
+    fillUsers($(event.currentTarget).attr("_id"));
+    $('#slotModal').openModal();
 };
+
 
 $(document).ready(function () {
     $('select').material_select();

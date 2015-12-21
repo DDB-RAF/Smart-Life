@@ -39,7 +39,6 @@ exports.add = function (appointment, callback) {
                             if (err) {
                                 callback(err);
                             } else {
-
                                 a.save(function (err) {
                                     callback(err, a);
                                 });
@@ -91,11 +90,14 @@ exports.finishById = function (id, callback) {
             var slot = d;
             slot.finished_num++;
             timeTableDAO.updateSlotById(doc.timeTable_id, slot, function (err) {
-                callback(err);
-            });
-            doc.status = 1;
-            doc.save(function (err) {
-                callback(err);
+                if (err) {
+                    callback(err);
+                } else {
+                    doc.status = 1;
+                    doc.save(function (err) {
+                        callback(err);
+                    });
+                }
             });
         });
 
@@ -132,10 +134,10 @@ exports.commentById = function (appointment, callback) {
  * output:
  *     callback(err,docs)
  */
-exports.query = function(q,callback){
+exports.query = function (q, callback) {
     AppointmentModel.find(q)
-    .populate('user_id','_id name email phone')
-    .exec(function(err,docs){
-        callback(err,docs);
-    });
+        .populate('user_id', '_id name email phone')
+        .exec(function (err, docs) {
+            callback(err, docs);
+        });
 };

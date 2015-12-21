@@ -15,4 +15,15 @@ router.get('/queryBySlotId',function(req,res,next){
     });
 });
 
+router.get('/finishById',function(req,res,next){
+    var id = req.query.id;
+    appointmentDAO.finishById(id,function(err){
+        if(err){
+            next(err);
+        }else{
+            res.send("Finished!");
+        }
+    });
+});
+
 module.exports = router;
