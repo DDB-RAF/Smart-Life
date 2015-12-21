@@ -19,7 +19,7 @@ exports.add = function (appointment, callback) {
             callback(err);
         } else {
             if (doc != null) {
-                err = new Error("Have made appointment");
+                err = new Error("Exists");
                 callback(err);
             } else {
                 //call back problem

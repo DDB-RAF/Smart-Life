@@ -88,7 +88,7 @@ var selectService = function (event) {
                         + '<b>F:' + timeTable[j].tables[i].finished_num + '</b>',
                         _id: timeTable[j].tables[i]._id,
                         style: "cursor:pointer",
-                        class:timeTable[j].tables[i].app_num - timeTable[j].tables[i].finished_num > timeTable[j].tables[i].app_num/2 ? "red" : "",
+                        class:timeTable[j].tables[i].app_num - timeTable[j].tables[i].finished_num > service.max_num/2 ? "red" : "",
                     }).click(selectSlot).appendTo(tr);
                 }
                 tr.appendTo('#timeTable tbody');
@@ -218,11 +218,9 @@ $(document).ready(function () {
             "__v": 0
         }
         $.session.set("supplier", JSON.stringify(supplier));
+        // window.location.href = './login.html';
     } else {
         supplier = JSON.parse(supplier);
-    }
-    if (supplier == null || supplier == undefined) {
-        window.location.href = './login.html';
     }
 	
     //fill the form
