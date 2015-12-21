@@ -13,8 +13,8 @@ var timeTable = {
 // 	}
 // });
 
-var timeTable_id = '56624d460579a198209374f7';
-var slot_id = '56624d460579a19820937509';
+var timeTable_id = '566ee3b8b46fe7781a0f77f2';
+var slot_id = '566ee3b8b46fe7781a0f7804';
 // timeTableDAO.findById(timeTable_id,function(err,doc){
 // 	if(err){
 // 		console.log(err);
@@ -23,13 +23,13 @@ var slot_id = '56624d460579a19820937509';
 // 	}
 // });
 
-// timeTableDAO.findSlotById(timeTable_id,slot_id,function(err,doc){
-// 	if(err){
-// 		console.log(err);
-// 	}else{
-// 		console.log(doc);
-// 	}
-// });
+timeTableDAO.findSlotById(timeTable_id,slot_id,function(err,doc){
+	if(err){
+		console.log(err);
+	}else{
+		console.log(doc);
+	}
+});
 // var slot = {
 // 	_id:slot_id,
 // 	app_num:10,
@@ -39,7 +39,7 @@ var slot_id = '56624d460579a19820937509';
 // 	console.log(err);
 // });
 
-timeTableDAO.findByServiceIdAndDate("566ec4ecf13dad302645a073",new Date('2015-12-16'),function(err,doc){
-	console.log(doc.date);
-});
+// timeTableDAO.findByServiceIdAndDate("566ec4ecf13dad302645a073",new Date('2015-12-16'),function(err,doc){
+// 	console.log(doc.date);
+// });
 

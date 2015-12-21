@@ -2,27 +2,27 @@
 <html>
 
 <head>
-	<meta charset=“UTF-8”/>
-	<title>SMART LIFE</title>
-	<link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" type="text/css" href="../libs/materialize/css/materialize.min.css" />
+    <meta charset=“UTF-8”/>
+    <title>SMART LIFE</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="../libs/materialize/css/materialize.min.css" />
 </head>
 
 <body>
 
-	<nav>
-		<div class="nav-wrapper">
-			<a href="#" class="brand-logo">Smart Life</a>
-			<ul class="right hide-on-med-and-down">
-				<li>
-					<a>Log out</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	<div class="row">
-		<div class="col s3">
-			<!--<ul class="collection with-header">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Smart Life</a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a>Log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col s3">
+            <!--<ul class="collection with-header">
 				<li class="collection-header">
 					<h5>My info</h5></li>
 				<li class="collection-header">
@@ -31,187 +31,209 @@
 				<li class="collection-item">Service b</li>
 				<li class="collection-item">Add service</li>
 			</ul>-->
-			<ul class="collapsible" data-collapsible="accordion">
-				<li>
-					<div id="myInfoCollection" class="collapsible-header"><i class="material-icons">perm_identity</i>My info</div>
-				</li>
-				<li>
-					<div class="collapsible-header"><i class="material-icons">toc</i>My services</div>
-					<div class="collapsible-body">
-						<ul id="serviceList" class="collection with-header">
-							<!--<li class="collection-item">Service a</li>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div id="myInfoCollection" class="collapsible-header"><i class="material-icons">perm_identity</i>My info</div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">toc</i>My services</div>
+                    <div class="collapsible-body">
+                        <ul id="serviceList" class="collection with-header">
+                            <!--<li class="collection-item">Service a</li>
 							<li class="collection-item">Service b</li>
 							<li class="collection-item">Add service</li>-->
-						</ul>
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div id="container">
-			<!--If choose the myInfo -->
-			<form id="myinfoForm" class="col s9">
-				<div class="row">
-					<div class="input-field col s6">
-						<i class="material-icons prefix">account_circle</i>
-						<input disabled id="userName" type="text" class="validate">
-						<label class="active" for="userName">UserName</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<i class="material-icons prefix">vpn_key</i>
-						<input id="passWord" type="password" class="validate">
-						<label class="active" for="passWord">Password</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<i class="material-icons prefix">person_pin</i>
-						<input id="name" type="text" class="validate">
-						<label class="active" for="name">Name</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<i class="material-icons prefix">email</i>
-						<input id="email" type="email" class="validate">
-						<label class="active" for="email">Email</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<i class="material-icons prefix">phone</i>
-						<input id="phone" type="text" class="validate">
-						<label class="active" for="phone">Phone</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<select id="classification">
-							<!--<option value="" disabled selected>Choose your classification</option>-->
-							<option value="school">school</option>
-							<option value="bank">bank</option>
-							<option value="hospital">hospital</option>
-						</select>
-						<label class="active" for="classification">Classification</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<textarea id="textarea" class="materialize-textarea"></textarea>
-						<label class="active" for="textarea">Description</label>
-					</div>
-				</div>
-				<div class="row col s6">
-					<a id="updateSupplier" class="waves-effect waves-light btn right">Update</a>
-				</div>
-			</form>
-			<!-- If choice a service -->
-			<form id="serviceForm" class="col s9" style="display:none">
-				<input id="service_id" type="hidden"/>
-				<div class="row">
-					<div class="input-field col s4">
-						<input disabled id="service_name" type="text" class="validate">
-						<label class="active" for="name">Name</label>
-					</div>
-					<div class="input-field col s4">
-						<input disabled id="total_app" type="text" class="validate">
-						<label class="active" for="total_app">Total appointments:</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s4">
-						<input disabled id="begin_time" type="text" class="validate">
-						<label class="active" for="begin_time">Begin Time</label>
-					</div>
-					<div class="input-field col s4">
-						<input disabled id="end_time" type="text" class="validate">
-						<label class="active" for="end_time">End Time</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s4">
-						<input disabled id="slot_length" type="text" class="validate">
-						<label class="active" for="slot_length">Slot length</label>
-					</div>
-					<div class="input-field col s4">
-						<input disabled id="max_num" type="text" class="validate">
-						<label class="active" for="max_num">Max num</label>
-					</div>
-				</div>
-				<div class="row">
-					<table id="timeTable" class="col s9 centered bordered">
-						<thead>
-							<tr>
-								<th>slots</th>
-							</tr>
-						</thead>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="container">
+            <!--If choose the myInfo -->
+            <form id="myinfoForm" class="col s9">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input disabled id="userName" type="text" class="validate">
+                        <label class="active" for="userName">UserName</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">vpn_key</i>
+                        <input id="passWord" type="password" class="validate">
+                        <label class="active" for="passWord">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">person_pin</i>
+                        <input id="name" type="text" class="validate">
+                        <label class="active" for="name">Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" type="email" class="validate">
+                        <label class="active" for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="phone" type="text" class="validate">
+                        <label class="active" for="phone">Phone</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select id="classification">
+                            <!--<option value="" disabled selected>Choose your classification</option>-->
+                            <option value="school">school</option>
+                            <option value="bank">bank</option>
+                            <option value="hospital">hospital</option>
+                        </select>
+                        <label class="active" for="classification">Classification</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <textarea id="textarea" class="materialize-textarea"></textarea>
+                        <label class="active" for="textarea">Description</label>
+                    </div>
+                </div>
+                <div class="row col s6">
+                    <a id="updateSupplier" class="waves-effect waves-light btn right">Update</a>
+                </div>
+            </form>
+            <!-- If choice a service -->
+            <form id="serviceForm" class="col s9" style="display:none">
+                <input id="service_id" type="hidden" />
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input disabled id="service_name" type="text" class="validate">
+                        <label class="active" for="name">Name</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input disabled id="total_app" type="text" class="validate">
+                        <label class="active" for="total_app">Total appointments:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input disabled id="begin_time" type="text" class="validate">
+                        <label class="active" for="begin_time">Begin Time</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input disabled id="end_time" type="text" class="validate">
+                        <label class="active" for="end_time">End Time</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input disabled id="slot_length" type="text" class="validate">
+                        <label class="active" for="slot_length">Slot length</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input disabled id="max_num" type="text" class="validate">
+                        <label class="active" for="max_num">Max num</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <table id="timeTable" class="col s9 centered bordered">
+                        <thead>
+                            <tr>
+                                <th>slots</th>
+                            </tr>
+                        </thead>
 
-						<tbody>
-							
-						</tbody>
-					</table>
-				</div>
-				<div class="row">
-					<a id="delete_service" class="waves-effect waves-light btn">Delete this service</a>
-				</div>
-			</form>
-			<!-- If choice to add a service -->
-			<!--<form class="col s9">
-				<div class="row">
-					<div class="input-field col s4">
-						<input id="name" type="text" class="validate">
-						<label class="active" for="name">Name</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s4">
-						<input id="begin_time" type="text" class="validate">
-						<label class="active" for="begin_time">Begin Time</label>
-					</div>
-					<div class="input-field col s4">
-						<input id="end_time" type="text" class="validate">
-						<label class="active" for="end_time">End Time</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s4">
-						<input id="slot_length" type="text" class="validate">
-						<label class="active" for="slot_length">Slot length</label>
-					</div>
-					<div class="input-field col s4">
-						<input id="max_num" type="text" class="validate">
-						<label class="active" for="max_num">Max num</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s4">
-						<select multiple id="weeks">
-							<option value="" disabled selected>Choose your weeks</option>
-							<option value="1">Mon.</option>
-							<option value="2">Tues.</option>
-							<option value="3">Wed.</option>
-							<option value="4">Thur.</option>
-							<option value="5">Fri.</option>
-							<option value="6">Sat.</option>
-							<option value="7">Sun.</option>
-						</select>
-						<label class="active" for="weeks">Weeks</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<textarea id="textarea" class="materialize-textarea"></textarea>
-						<label class="active" for="textarea">Description</label>
-					</div>
-				</div>
-				<div class="row">
-					<a class="waves-effect waves-light btn">Add</a>
-				</div>
-			</form>-->
+                        <tbody>
 
-		</div>
-	</div>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <a id="delete_service" class="waves-effect waves-light btn">Delete this service</a>
+                </div>
+            </form>
+            <!-- If choice to add a service -->
+            <form id="addServiceForm" class="col s9" style="display:none">
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input id="name_add" type="text" class="validate">
+                        <label class="active" for="name_add">Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input id="begin_time_add" type="text" class="validate">
+                        <label class="active" for="begin_time_add">Begin Time</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="end_time_add" type="text" class="validate">
+                        <label class="active" for="end_time_add">End Time</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <input id="slot_length_add" type="text" class="validate">
+                        <label class="active" for="slot_length_add">Slot length</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input id="max_num_add" type="text" class="validate">
+                        <label class="active" for="max_num_add">Max num</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4">
+                        <select multiple id="weeks_add">
+                            <option value="" disabled selected>Choose your weeks</option>
+                            <option value="1">Mon.</option>
+                            <option value="2">Tues.</option>
+                            <option value="3">Wed.</option>
+                            <option value="4">Thur.</option>
+                            <option value="5">Fri.</option>
+                            <option value="6">Sat.</option>
+                            <option value="7">Sun.</option>
+                        </select>
+                        <label class="active" for="weeks_add">Weeks</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <textarea id="textarea_add" class="materialize-textarea"></textarea>
+                        <label class="active" for="textarea_add">Description</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <a id="add_service_button" class="waves-effect waves-light btn">Add</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!--Modal structure-->
+    <div id="slotModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Appointment Users</h4>
+            <table class="centered bordered">
+                <thead>
+                    <tr>
+                       <th>Name</th>
+                       <th>Email</th>
+                       <th>Phone</th>
+                       <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="app_users">
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+        </div>
+    </div>
 </body>
 <script type="text/javascript" src="../libs/JQuery/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="../libs/materialize/js/materialize.min.js"></script>

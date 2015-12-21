@@ -50,9 +50,11 @@ app.use(bodyParser.urlencoded({extended:true}));
 //add supplier route
 var supplier = require('./routers/supplierRouter.js');
 var service = require('./routers/serviceRouter.js');
+var appointment = require('./routers/appointmentRouter.js');
 
 app.use('/supplier',supplier);
 app.use('/service',service);
+app.use('/appointment',appointment);
 
 
 app.set('host', '127.0.0.1');

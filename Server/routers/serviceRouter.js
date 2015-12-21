@@ -26,6 +26,18 @@ router.get('/deleteById',function(req,res,next){
 	});
 });
 
+router.post('/add',function(req,res,next){
+    var s = req.body.service;
+    console.log(s);
+    serviceDAO.add(s,function(err,doc){
+        if(err){
+            next(err);
+        }else{
+            res.send('Add service successfully');
+        }
+    })
+});
+
 router.get('/queryById', function (req, res, next) {
 	var id = req.query.id;
 	var date = new Date(req.query.date);
@@ -36,7 +48,7 @@ router.get('/queryById', function (req, res, next) {
 		} else {
 			var RECENT_DAYS = 7;
 			var dayList = [];
-			dayList.push(new Date(date));
+            date.setDate(date.getDate() - 1);
 			while (dayList.length < RECENT_DAYS) {
 				var d = new Date(date.setDate(date.getDate() + 1));
 				if (doc.weeks.indexOf(d.getDay()) >= 0) {
