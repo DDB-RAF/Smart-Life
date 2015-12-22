@@ -7,29 +7,29 @@ var timeTableDAO =require('../dao/timeTableDAO.js');
 
 
 for (var i = 0; i < 3; i++) {
-	var user = {
-		userName: 'zhangfei' + i,
-		passWord: 'zhagnfei',
-		name: 'Fly zhang',
-		email: 'zhangfei614@126.com',
-		phone: '188'
-	};
-	userDAO.add(user, function (err) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log("add user success");
-		}
-	});
+	// var user = {
+	// 	userName: 'zhangfei' + i,
+	// 	passWord: 'zhagnfei',
+	// 	name: 'Fly zhang',
+	// 	email: 'zhangfei614@126.com',
+	// 	phone: '188'
+	// };
+	// userDAO.add(user, function (err) {
+	// 	if (err) {
+	// 		console.log(err);
+	// 	} else {
+	// 		console.log("add user success");
+	// 	}
+	// });
 
 	var supplier = {
-		userName: 'boc' + i,
-		passWord: 'boc',
-		name: "bank of china",
+		userName: 'school' + i,
+		passWord: 'school',
+		name: "school ",
 		email: "zhangfei614@126.com",
 		phone: "155",
-		desc: "zhangfei",
-		classification: "bank"
+		desc: "school",
+		classification: "school"
 	};
 
 	supplierDAO.add(supplier, function (err, doc) {
@@ -40,13 +40,13 @@ for (var i = 0; i < 3; i++) {
 			for (var i = 0; i < 2; i++) {
 				var service = {
 					supplier_id: doc._id,
-					name: 'save money' + i,
+					name: 'school service' + i,
 					weeks: [1, 2, 3, 4, 5],
 					begin_time: '08:00',
 					end_time: '17:00',
 					slot_length: 0.5,
 					max_num: 5,
-					desc: 'save money'
+					desc: 'school service'
 				};
 				serviceDAO.add(service, function (err, d) {
 					if (err) {

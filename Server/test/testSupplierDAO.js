@@ -17,7 +17,7 @@ var supplier = {
 // 	}
 // });
 
-supplier._id = '566e2d9ad07c3c981e02f1ca';
+// supplier._id = '566e2d9ad07c3c981e02f1ca';
 // supplierDAO.findById(supplier._id,function(err,doc){
 // 	if(err){
 // 		console.log(err);
@@ -26,14 +26,14 @@ supplier._id = '566e2d9ad07c3c981e02f1ca';
 // 	}
 // });
 
-supplier.phone='199';
-supplierDAO.updateSupplier(supplier,function(err){
-	if(err){
-		console.log(err);
-	}else{
-		console.log('update success');
-	}
-});
+// supplier.phone='199';
+// supplierDAO.updateSupplier(supplier,function(err){
+// 	if(err){
+// 		console.log(err);
+// 	}else{
+// 		console.log('update success');
+// 	}
+// });
 
 // supplierDAO.deleteById(supplier._id,function(err){
 // 	if(err){
@@ -43,3 +43,11 @@ supplierDAO.updateSupplier(supplier,function(err){
 // 	}
 // });
 
+
+supplierDAO.groupByClassificaton(function(err,res){
+    if(err){
+        console.log(err);
+    }else{
+        console.log(res);
+    }
+});
