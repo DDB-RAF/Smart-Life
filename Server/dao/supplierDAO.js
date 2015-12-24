@@ -89,6 +89,7 @@ exports.updateSupplier = function (supplier, callback) {
             doc.email = supplier.email;
             doc.phone = supplier.phone;
             doc.desc = supplier.desc;
+            doc.classification = supplier.classificatin;
             doc.save(function (err) {
                 callback(err);
             });

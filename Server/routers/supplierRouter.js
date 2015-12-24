@@ -18,6 +18,7 @@ router.get('/queryById',function(req,res,next){
 		if(err){
 			next(err);
 		}else{
+            console.log(doc);
 			res.send(doc);
 		}
 	});

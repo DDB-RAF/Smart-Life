@@ -5,37 +5,42 @@ var updateSupplier = function () {
     var phone = $('#phone').val();
     var classification = $('#classification').val();
     var desc = $('textarea').val();
-    var s = {};
-    if (passWord != "") s['passWord'] = passWord;
-    if (name != "") s['name'] = name;
-    if (email != "") s['email'] = email;
-    if (phone != "") s['phone'] = phone;
-    if (classification != "") s['classification'] = classification;
-    if (desc != "") s['desc'] = desc;
-    var supplier = JSON.parse($.session.get('supplier'));
-    s['_id'] = supplier._id;
-    $.ajax({
-        type: 'POST',
-        url: '/supplier/update',
-        data: {
-            supplier: s
-        },
-        success: function (data) {
-            Materialize.toast(data, 1000, '', function () {
-                $.ajax({
-                    type: 'GET',
-                    url: '/supplier/queryById',
-                    data: {
-                        id: s['_id']
-                    },
-                    success: function (data) {
-                        $.session.set("supplier", JSON.stringify(data));
-                        window.location.reload();
-                    }
-                })
-            });
-        }
-    });
+
+    if (passWord == "" || name == "" || email == "" || phone == "" || desc == "") {
+        Materialize.toast("Please fill the form", 1000);
+    } else {
+        var supplier = JSON.parse($.session.get('supplier'));
+        var s = {};
+        s['_id'] = supplier._id;
+        s['passWord'] = passWord;
+        s['name'] = name;
+        s['email'] = email;
+        s['phone'] = phone;
+        s['classification'] = classification;
+        s['desc'] = desc;
+        $.ajax({
+            type: 'POST',
+            url: '/supplier/update',
+            data: {
+                supplier: s
+            },
+            success: function (data) {
+                Materialize.toast(data, 1000, '', function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/supplier/queryById',
+                        data: {
+                            id: s['_id']
+                        },
+                        success: function (data) {
+                            $.session.set("supplier", JSON.stringify(data));
+                            window.location.reload();
+                        }
+                    })
+                });
+            }
+        });
+    }
 };
 
 
@@ -88,7 +93,7 @@ var selectService = function (event) {
                         + '<b>F:' + timeTable[j].tables[i].finished_num + '</b>',
                         _id: timeTable[j].tables[i]._id,
                         style: "cursor:pointer",
-                        class:timeTable[j].tables[i].app_num - timeTable[j].tables[i].finished_num > service.max_num/2 ? "red" : "",
+                        class: timeTable[j].tables[i].app_num - timeTable[j].tables[i].finished_num > service.max_num / 2 ? "red" : "",
                     }).click(selectSlot).appendTo(tr);
                 }
                 tr.appendTo('#timeTable tbody');
@@ -158,7 +163,7 @@ var finishApp = function (event) {
         },
         success: function (data) {
             Materialize.toast(data, 2000, '', function () {
-               fillUsers($('#app_users').attr("_id"));
+                fillUsers($('#app_users').attr("_id"));
             });
         }
     });
@@ -207,7 +212,7 @@ $(document).ready(function () {
     //for test,to use a exsiting supplier
     if (supplier == undefined) {
         supplier = {
-            "_id": "566ee3b8b46fe7781a0f77e6",
+            "_id": "566ee3b8b46fe7781a0f77e8",
             "userName": "boc1",
             "passWord": "boc",
             "name": "bank of china",
