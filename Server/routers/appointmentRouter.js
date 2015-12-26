@@ -25,6 +25,16 @@ router.get('/queryByUserId',function(req,res,next){
        }
    });
 });
+router.get('/cancelById',function(req,res,next){
+    var id = req.query.id;
+    appointmentDAO.deleteById(id,function(err){
+        if(err){
+            next(err);
+        }else{
+            res.send("Cancel successfully!");
+        }
+    });
+});
 
 router.get('/finishById', function (req, res, next) {
     var id = req.query.id;
@@ -33,6 +43,17 @@ router.get('/finishById', function (req, res, next) {
             next(err);
         } else {
             res.send("Finished!");
+        }
+    });
+});
+
+router.post('/comment',function(req,res,next){
+    var app = req.body.app;
+    appointmentDAO.commentById(app,function(err){
+        if(err){
+            next(err);
+        }else{
+            res.send("Comment successfully!");
         }
     });
 });

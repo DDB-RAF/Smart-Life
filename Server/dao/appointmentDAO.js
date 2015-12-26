@@ -73,8 +73,14 @@ exports.deleteById = function (id, callback) {
         timeTableDAO.findSlotById(doc.timeTable_id, doc.slot_id, function (err, d) {
             var slot = d;
             slot.app_num--;
-            timeTableDAO.updateSlotById(doc.timeTale_id, slot, function (err) {
-                callback(err);
+            timeTableDAO.updateSlotById(doc.timeTable_id, slot, function (err) {
+                if(err){
+                    callback(err);
+                }else{
+                    AppointmentModel.findByIdAndRemove(id,function(err){
+                        callback(err);
+                    });
+                }
             });
         });
     });
@@ -145,15 +151,15 @@ exports.queryBySlotId = function (id, callback) {
  */
 exports.queryByUserId = function (id, callback) {
     AppointmentModel.find({ user_id: id })
-        .populate('timeTable_id', 'service_id date tables')
+        .populate('timeTable_id', 'service_id tables')
         .exec(function (err, docs) {
             ServiceModel.populate(docs, {
                 path: 'timeTable_id.service_id',
-                select: 'name total_app supplier_id'
+                select: 'name total_app supplier_id max_num desc'
             }, function (err, docs) {
                 SupplierModel.populate(docs, {
                     path: 'timeTable_id.service_id.supplier_id',
-                    select: 'name phone email'
+                    select: 'name phone email desc'
                 }, function (err, docs) {
                     if (err) {
                         callback(err, null);
@@ -162,6 +168,8 @@ exports.queryByUserId = function (id, callback) {
                         for (var i in docs) {
                             var r = {};
                             r['_id'] = docs[i]._id;
+                            r['status']=docs[i].status;
+                            r['comment']=docs[i].comment;
                             r['slot'] = docs[i].timeTable_id.tables.id(docs[i].slot_id);
                             r['service'] = docs[i].timeTable_id.service_id;
                             r['supplier'] = docs[i].timeTable_id.service_id.supplier_id;
