@@ -3,7 +3,8 @@ var db = require('./db.js');
 var timeTableDAO = require('./timeTableDAO.js');
 
 var AppointmentModel = db.mongoose.model('appointment', schema.appointmentSchema);
-
+var ServiceModel = db.mongoose.model('service', schema.serviceSchema);
+var SupplierModel = db.mongoose.model('supplier', schema.supplierSchema);
 /**
  * input:
  *    appointment={
@@ -127,17 +128,49 @@ exports.commentById = function (appointment, callback) {
 
 /**
  * input:
- *  {
- *     slot_id:ObjectId
- *      ...
- *  }
+ *     id:slot_id
  * output:
  *     callback(err,docs)
  */
-exports.query = function (q, callback) {
-    AppointmentModel.find(q)
+exports.queryBySlotId = function (id, callback) {
+    AppointmentModel.find({ slot_id: id })
         .populate('user_id', '_id name email phone')
         .exec(function (err, docs) {
             callback(err, docs);
         });
 };
+
+/**
+ * 
+ */
+exports.queryByUserId = function (id, callback) {
+    AppointmentModel.find({ user_id: id })
+        .populate('timeTable_id', 'service_id date tables')
+        .exec(function (err, docs) {
+            ServiceModel.populate(docs, {
+                path: 'timeTable_id.service_id',
+                select: 'name total_app supplier_id'
+            }, function (err, docs) {
+                SupplierModel.populate(docs, {
+                    path: 'timeTable_id.service_id.supplier_id',
+                    select: 'name phone email'
+                }, function (err, docs) {
+                    if (err) {
+                        callback(err, null);
+                    } else {
+                        var result = [];
+                        for (var i in docs) {
+                            var r = {};
+                            r['_id'] = docs[i]._id;
+                            r['slot'] = docs[i].timeTable_id.tables.id(docs[i].slot_id);
+                            r['service'] = docs[i].timeTable_id.service_id;
+                            r['supplier'] = docs[i].timeTable_id.service_id.supplier_id;
+                            // delete r.service.supplier_id;
+                            result.push(r);
+                        }
+                            callback(err,result);
+                    }
+                });
+            });
+        });
+}

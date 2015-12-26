@@ -24,7 +24,7 @@ exports.userSchema = new Schema({
 });
 
 exports.serviceSchema = new Schema({
-	supplier_id:Schema.Types.ObjectId,
+	supplier_id:{type:Schema.Types.ObjectId,ref:'supplier'},
 	name:String,
 	//keyWords:[String],	//delete
 	total_app:{type:Number,default:0},
@@ -44,7 +44,7 @@ var slotSchema = new Schema({
 });
 
 exports.timeTableSchema = new Schema({
-	service_id:Schema.Types.ObjectId,
+	service_id:{type:Schema.Types.ObjectId,ref:'service'},
 	date:Schema.Types.Date,		//format:yyyy-MM-dd 00:00
 	tables:[slotSchema]
 });
@@ -52,7 +52,7 @@ exports.timeTableSchema = new Schema({
 exports.appointmentSchema = new Schema({
 	user_id:{type:Schema.Types.ObjectId,ref:'user'},
 	slot_id:Schema.Types.ObjectId,
-	timeTable_id:Schema.Types.ObjectId,
+	timeTable_id:{type:Schema.Types.ObjectId,ref:'timeTable'},
 	status:{type:Number,default:0}, //0:not finished,1:finished,2:commented
 	comment:{type:String,default:''}
 });

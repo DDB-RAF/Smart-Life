@@ -56,7 +56,7 @@ $(document).ready(function () {
             "total_app": 0,
             "__v": 0
         }
-        $.sesion.set("user", JSON.stringify(user));
+        $.session.set("user", JSON.stringify(user));
     } else {
         user = JSON.parse(user);
     }

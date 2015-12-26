@@ -6,13 +6,24 @@ var userDAO = require('../dao/userDAO.js');
 
 router.get('/queryBySlotId', function (req, res, next) {
     var id = req.query.slot_id;
-    appointmentDAO.query({ slot_id: id }, function (err, docs) {
+    appointmentDAO.queryBySlotId(id, function (err, docs) {
         if (err) {
             next(err);
         } else {
             res.send(docs);
         }
     });
+});
+
+router.get('/queryByUserId',function(req,res,next){
+   var id = req.query.id;
+   appointmentDAO.queryByUserId(id,function(err,docs){
+       if(err){
+           next(err);
+       }else{
+           res.send(docs);
+       }
+   });
 });
 
 router.get('/finishById', function (req, res, next) {
