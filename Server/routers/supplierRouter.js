@@ -62,4 +62,24 @@ router.post('/login', function (req, res, next) {
     });
 });
 
+router.post('/add',function(req,res,next){
+    var u = req.body.user;
+    supplierDAO.add(u,function(err,doc){
+        if(err){
+            if(err.message =='Supplier Exists'){
+                res.send({
+                    message:err.message,
+                    user:null
+                });
+            }else{
+                next(err);
+            }
+        }else{
+            res.send({
+                message:'success',
+                user:doc
+            });
+        }
+    });
+})
 module.exports = router;

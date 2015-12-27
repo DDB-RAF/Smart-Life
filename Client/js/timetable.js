@@ -21,7 +21,7 @@ var selectSlot = function (event) {
     } else {
         var user = $.session.get('user');
         if (user == undefined) {
-            Materialize.toast("Please login first!");
+            Materialize.toast("Please login first!",1000);
         } else {
             user = JSON.parse(user);
             $('#user_id').attr("value", user._id);
@@ -56,28 +56,14 @@ var addAppointment = function (event) {
     });
 }
 $(document).ready(function () {
-    var user = $.session.get('user');
-    if (user == undefined) {
-        // for test
-        user = {
-            "_id": "566ee3b8b46fe7781a0f77e7",
-            "userName": "zhangfei0",
-            "passWord": "zhagnfei",
-            "name": "Fly zhang",
-            "email": "zhangfei614@126.com",
-            "phone": "188",
-            "canceled_app": 0,
-            "total_app": 0,
-            "__v": 0
-        }
-        $.session.set("user", JSON.stringify(user));
-
-        // Materialize.toast("Please login first!", 1000, '', function () {
-        //     window.location.href = './login.html';
-        // });
-    } else {
-        user = JSON.parse(user);
-    }
+    // var user = $.session.get('user');
+    // if (user == undefined) {
+    //     Materialize.toast("Please login first!", 1000, '', function () {
+    //         window.location.href = './login.html';
+    //     });
+    // } else {
+    //     user = JSON.parse(user);
+    // }
     
     //fill the from
     var service_id = getUrlParameter('id');
@@ -143,4 +129,29 @@ $(document).ready(function () {
     
     //add event
     $('#addAppointment').click(addAppointment);
+    
+    var user = $.session.get('user');
+    var supplier = $.session.get('supplier');
+    if (user == undefined && supplier == undefined) {
+        $('<li/>').append($('<a/>', {
+            href: "login.html",
+            html: "Login"
+        })).appendTo($('#nav-mobile'));
+    } else if (user != undefined && supplier == undefined) {
+        $('<li/>').append($('<a/>', {
+            href: "account.html",
+            html: "My Account"
+        })).appendTo($('#nav-mobile'));
+    } else if (user == undefined && supplier != undefined) {
+        $('<li/>').append($('<a/>', {
+            href: "supplier.html",
+            html: "My Account"
+        })).appendTo($('#nav-mobile'));
+    } else {
+        $.session.clear();
+        $('<li/>').append($('<a/>', {
+            href: "login.html",
+            html: "Login"
+        })).appendTo($('#nav-mobile'));
+    }
 });

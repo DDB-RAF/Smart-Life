@@ -26,7 +26,7 @@ var loginFunction = function (event) {
                     if (data.message == 'success') {
                         if (role == false) {
                             $.session.set('user', JSON.stringify(data.user));
-                            window.location.href ='main.html';
+                            window.location.href ='account.html';
                         }else{
                             $.session.set('supplier',JSON.stringify(data.user));
                             window.location.href ='supplier.html';

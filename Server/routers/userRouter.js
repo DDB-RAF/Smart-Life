@@ -51,4 +51,25 @@ router.post('/login', function (req, res, next) {
         }
     });
 });
+
+router.post('/add',function(req,res,next){
+    var u = req.body.user;
+    userDAO.add(u,function(err,doc){
+        if(err){
+            if(err.message =='User Exists'){
+                res.send({
+                    message:err.message,
+                    user:null
+                });
+            }else{
+                next(err);
+            }
+        }else{
+            res.send({
+                message:'success',
+                user:doc
+            });
+        }
+    });
+})
 module.exports = router;

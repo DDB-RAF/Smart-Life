@@ -155,18 +155,21 @@ $(document).ready(function () {
     var user = $.session.get('user');
     //for test, to use a exsiting user
     if (user == undefined) {
-        user = {
-            "_id": "566ee3b8b46fe7781a0f77e7",
-            "userName": "zhangfei0",
-            "passWord": "zhagnfei",
-            "name": "Fly zhang",
-            "email": "zhangfei614@126.com",
-            "phone": "188",
-            "canceled_app": 0,
-            "total_app": 0,
-            "__v": 0
-        }
-        $.session.set("user", JSON.stringify(user));
+        // user = {
+        //     "_id": "566ee3b8b46fe7781a0f77e7",
+        //     "userName": "zhangfei0",
+        //     "passWord": "zhagnfei",
+        //     "name": "Fly zhang",
+        //     "email": "zhangfei614@126.com",
+        //     "phone": "188",
+        //     "canceled_app": 0,
+        //     "total_app": 0,
+        //     "__v": 0
+        // }
+        // $.session.set("user", JSON.stringify(user));
+         Materialize.toast("Please login firstly", 500,'',function(){
+             window.location.href = "login.html";
+         });
     } else {
         user = JSON.parse(user);
     }
@@ -182,4 +185,15 @@ $(document).ready(function () {
     
     //add myAppointment event
     $('#myAppCollection').click(myAppointments);
+    
+    //add myInfo event
+    $('#myInfoCollection').click(function(){
+        $('#myinfoForm').show();
+        $('#myAppointmnet').hide();
+    });
+    
+    $('#logout').click(function(){
+        $.session.clear();
+        window.location.href="login.html";
+    });
 });

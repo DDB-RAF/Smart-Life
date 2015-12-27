@@ -9,22 +9,22 @@ var selectSupplier = function (event) {
         success: function (data) {
             $('#serviceTbody').empty();
             var tr = $('<tr/>');
-            for(i in data){
-                var td = $('<td/>',{class:"col s3"});
-                var cardDiv = $('<div/>',{class:"blue-grey darken-1 card"});
-                var contentDIV = $('<div/>',{class:"card-content white-text"});
-                $('<span/>',{class:"card-title",html:data[i].name}).appendTo(contentDIV);
-                $('<p/>',{html:"Begin time:"+data[i].begin_time}).appendTo(contentDIV);
-                $('<p/>',{html:"End time:"+data[i].end_time}).appendTo(contentDIV);
-                
-                var actionDiv = $('<div/>',{class:"card-action"});
-                $('<a/>',{href:"timetable.html?id="+data[i]._id,html:"Time Table"}).appendTo(actionDiv);
-                
+            for (i in data) {
+                var td = $('<td/>', { class: "col s3" });
+                var cardDiv = $('<div/>', { class: "blue-grey darken-1 card" });
+                var contentDIV = $('<div/>', { class: "card-content white-text" });
+                $('<span/>', { class: "card-title", html: data[i].name }).appendTo(contentDIV);
+                $('<p/>', { html: "Begin time:" + data[i].begin_time }).appendTo(contentDIV);
+                $('<p/>', { html: "End time:" + data[i].end_time }).appendTo(contentDIV);
+
+                var actionDiv = $('<div/>', { class: "card-action" });
+                $('<a/>', { href: "timetable.html?id=" + data[i]._id, html: "Time Table" }).appendTo(actionDiv);
+
                 contentDIV.appendTo(cardDiv);
                 actionDiv.appendTo(cardDiv);
                 cardDiv.appendTo(td);
                 td.appendTo(tr);
-                if(i%3==2|| i == data.length-1){
+                if (i % 3 == 2 || i == data.length - 1) {
                     tr.appendTo($('#serviceTbody'));
                     tr = $('<tr/>');
                 }
@@ -61,4 +61,28 @@ $(document).ready(function () {
         }
     });
 
+    var user = $.session.get('user');
+    var supplier = $.session.get('supplier');
+    if (user == undefined && supplier == undefined) {
+        $('<li/>').append($('<a/>', {
+            href: "login.html",
+            html: "Login"
+        })).appendTo($('#nav-mobile'));
+    } else if (user != undefined && supplier == undefined) {
+        $('<li/>').append($('<a/>', {
+            href: "account.html",
+            html: "My Account"
+        })).appendTo($('#nav-mobile'));
+    } else if (user == undefined && supplier != undefined) {
+        $('<li/>').append($('<a/>', {
+            href: "supplier.html",
+            html: "My Account"
+        })).appendTo($('#nav-mobile'));
+    } else {
+        $.session.clear();
+        $('<li/>').append($('<a/>', {
+            href: "login.html",
+            html: "Login"
+        })).appendTo($('#nav-mobile'));
+    }
 });

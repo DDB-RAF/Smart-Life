@@ -211,19 +211,10 @@ $(document).ready(function () {
 	
     //for test,to use a exsiting supplier
     if (supplier == undefined) {
-        supplier = {
-            "_id": "566ee3b8b46fe7781a0f77e8",
-            "userName": "boc1",
-            "passWord": "boc",
-            "name": "bank of china",
-            "email": "zhangfei614@126.com",
-            "phone": "155",
-            "desc": "zhangfei",
-            "classification": "bank",
-            "__v": 0
-        }
-        $.session.set("supplier", JSON.stringify(supplier));
-        // window.location.href = './login.html';
+
+        Materialize.toast("Please login firstly", 500, '', function () {
+            window.location.href = "login.html";
+        }); 
     } else {
         supplier = JSON.parse(supplier);
     }
@@ -278,4 +269,9 @@ $(document).ready(function () {
 
     //add service event
     $('#add_service_button').click(addService);
+
+    $('#logout').click(function () {
+        $.session.clear();
+        window.location.href = "login.html";
+    });
 });
