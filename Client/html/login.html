@@ -1,38 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8"/>
+
+<head>
+    <meta charset="UTF-8" />
     <title>SMART LIFE</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="../libs/materialize/css/materialize.min.css"/>
-  </head>
-  <body>
-    <div class="container">
-      <main role="main">
-        <div class="row">
-          <form class="col s12">
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="username" type="text" class="validate">
-                <label for="username">Username</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="password" type="password" class="validate">
-                <label for="password">Password</label>
-              </div>
-            </div>
-            <div class="row center-align">
-                <a class="waves-effect waves-light btn" type="submit">Sign in</a>
-                <br>
-                <a href="register.html">Not registered ? Create an account.</a>
-            </div>
-          </form>
+    <link rel="stylesheet" type="text/css" href="../libs/materialize/css/materialize.min.css" />
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Smart Life</a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a>Log out</a>
+                </li>
+            </ul>
         </div>
-      </main>
-      </div>
+    </nav>
+    <div class="container">
+        <div class="container">
+            <div class="container">
+                <div class="col s12 z-depth-4 card-panel">
+                    <form class="login-form">
+                        <div class="row">
+                            <div class="input-field col s12 center">
+                                <img src="../images/logo.jpg" alt="" class="circle responsive-img valign profile-image-login">
+                                <p class="center login-form-text"><b>Smart Life</b></p>
+                            </div>
+                        </div>
+                        <div class="row margin">
+                            <div class="input-field ">
+                                <i class="mdi-social-person-outline prefix"></i>
+                                <input id="username" type="text">
+                                <label for="username" class="center-align">Username</label>
+                            </div>
+                        </div>
+                        <div class="row margin">
+                            <div class="input-field ">
+                                <i class="mdi-action-lock-outline prefix"></i>
+                                <input id="password" type="password">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="switch">
+                            <label>
+                                User
+                                <input id="roleSwitch" type="checkbox">
+                                <span class="lever"></span>
+                                Supplier
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="input-field ">
+                                <a id="loginButton" class="btn waves-effect waves-light col s3 right">Login</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6 right">
+                                <p class="right"><a href="register.html">Register Now!</a></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--<main role="main">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" type="text" class="validate">
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row center-align">
+                        <a class="waves-effect waves-light btn" type="submit">Sign in</a>
+                        <br>
+                        <a href="register.html">Not registered ? Create an account.</a>
+                    </div>
+                </form>
+            </div>
+        </main>-->
+    </div>
     <script type="text/javascript" src="../libs/JQuery/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../libs/materialize/js/materialize.min.js"></script>
-  </body>
+    <script type="text/javascript" src="../libs/JQuerySession/jquerysession.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+</body>
+
 </html>

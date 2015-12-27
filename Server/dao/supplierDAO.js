@@ -54,6 +54,11 @@ exports.findById = function (id, callback) {
     });
 };
 
+exports.findByName = function (userName, callback) {
+	SupplierModel.findOne({ userName: userName }, function (err, doc) {
+		callback(err, doc);
+	});
+};
 /**
  * input:
  * 		id:ObjectId
