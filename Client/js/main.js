@@ -60,7 +60,8 @@ $(document).ready(function () {
             }
         }
     });
-
+    
+    
     var user = $.session.get('user');
     var supplier = $.session.get('supplier');
     if (user == undefined && supplier == undefined) {

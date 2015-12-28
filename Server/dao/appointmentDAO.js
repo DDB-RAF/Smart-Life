@@ -1,6 +1,7 @@
 var schema = require('./schema.js');
 var db = require('./db.js');
 var timeTableDAO = require('./timeTableDAO.js');
+var serviceDAO = require('./serviceDAO.js');
 
 var AppointmentModel = db.mongoose.model('appointment', schema.appointmentSchema);
 var ServiceModel = db.mongoose.model('service', schema.serviceSchema);
@@ -10,7 +11,8 @@ var SupplierModel = db.mongoose.model('supplier', schema.supplierSchema);
  *    appointment={
  * 		user_id:ObjectId,
  * 		slot_id:ObjectId,
- * 		timeTable_id:ObjectId
+ * 		timeTable_id:ObjectId,
+ *      service_id:ObjectId
  * }
  * callback(err,a)
  */
@@ -27,21 +29,34 @@ exports.add = function (appointment, callback) {
                 var a = new AppointmentModel({
                     user_id: appointment.user_id,
                     slot_id: appointment.slot_id,
-                    timeTable_id: appointment.timeTable_id
+                    timeTable_id: appointment.timeTable_id,
+                    service_id: appointment.service_id
                 });
-
-                timeTableDAO.findSlotById(a.timeTable_id, a.slot_id, function (err, d) {
+                serviceDAO.findById(a.service_id, function (err, s) {
                     if (err) {
                         callback(err);
                     } else {
-                        var slot = d;
-                        slot.app_num++;
-                        timeTableDAO.updateSlotById(a.timeTable_id, slot, function (err) {
+                        s.total_app++;
+                        s.save(function (err) {
                             if (err) {
                                 callback(err);
                             } else {
-                                a.save(function (err) {
-                                    callback(err, a);
+                                timeTableDAO.findSlotById(a.timeTable_id, a.slot_id, function (err, d) {
+                                    if (err) {
+                                        callback(err);
+                                    } else {
+                                        var slot = d;
+                                        slot.app_num++;
+                                        timeTableDAO.updateSlotById(a.timeTable_id, slot, function (err) {
+                                            if (err) {
+                                                callback(err);
+                                            } else {
+                                                a.save(function (err) {
+                                                    callback(err, a);
+                                                });
+                                            }
+                                        });
+                                    }
                                 });
                             }
                         });
@@ -70,19 +85,36 @@ exports.findById = function (id, callback) {
  */
 exports.deleteById = function (id, callback) {
     AppointmentModel.findOne({ _id: id }, function (err, doc) {
-        timeTableDAO.findSlotById(doc.timeTable_id, doc.slot_id, function (err, d) {
-            var slot = d;
-            slot.app_num--;
-            timeTableDAO.updateSlotById(doc.timeTable_id, slot, function (err) {
-                if(err){
+        if (err) {
+            callback(err)
+        } else {
+            serviceDAO.findById(doc.service_id, function (err, s) {
+                if (err) {
                     callback(err);
-                }else{
-                    AppointmentModel.findByIdAndRemove(id,function(err){
-                        callback(err);
+                } else {
+                    s.total_app--;
+                    s.save(function (err) {
+                        if (err) {
+                            callback(err);
+                        } else {
+                            timeTableDAO.findSlotById(doc.timeTable_id, doc.slot_id, function (err, d) {
+                                var slot = d;
+                                slot.app_num--;
+                                timeTableDAO.updateSlotById(doc.timeTable_id, slot, function (err) {
+                                    if (err) {
+                                        callback(err);
+                                    } else {
+                                        AppointmentModel.findByIdAndRemove(id, function (err) {
+                                            callback(err);
+                                        });
+                                    }
+                                });
+                            });
+                        }
                     });
                 }
             });
-        });
+        }
     });
 };
 
@@ -152,33 +184,37 @@ exports.queryBySlotId = function (id, callback) {
 exports.queryByUserId = function (id, callback) {
     AppointmentModel.find({ user_id: id })
         .populate('timeTable_id', 'service_id tables')
+        .populate('service_id', 'name total_app supplier_id max_num desc')
         .exec(function (err, docs) {
-            ServiceModel.populate(docs, {
-                path: 'timeTable_id.service_id',
-                select: 'name total_app supplier_id max_num desc'
+            SupplierModel.populate(docs, {
+                path: 'service_id.supplier_id',
+                select: 'name phone email desc'
             }, function (err, docs) {
-                SupplierModel.populate(docs, {
-                    path: 'timeTable_id.service_id.supplier_id',
-                    select: 'name phone email desc'
-                }, function (err, docs) {
-                    if (err) {
-                        callback(err, null);
-                    } else {
-                        var result = [];
-                        for (var i in docs) {
-                            var r = {};
-                            r['_id'] = docs[i]._id;
-                            r['status']=docs[i].status;
-                            r['comment']=docs[i].comment;
-                            r['slot'] = docs[i].timeTable_id.tables.id(docs[i].slot_id);
-                            r['service'] = docs[i].timeTable_id.service_id;
-                            r['supplier'] = docs[i].timeTable_id.service_id.supplier_id;
-                            // delete r.service.supplier_id;
-                            result.push(r);
-                        }
-                            callback(err,result);
+                if (err) {
+                    callback(err, null);
+                } else {
+                    var result = [];
+                    for (var i in docs) {
+                        var r = {};
+                        r['_id'] = docs[i]._id;
+                        r['status'] = docs[i].status;
+                        r['comment'] = docs[i].comment;
+                        r['slot'] = docs[i].timeTable_id.tables.id(docs[i].slot_id);
+                        r['service'] = docs[i].service_id;
+                        r['supplier'] = docs[i].service_id.supplier_id;
+                        // delete r.service.supplier_id;
+                        result.push(r);
                     }
-                });
+                    callback(err, result);
+                }
             });
+        });
+}
+
+exports.queryByServiceId = function (id, callback) {
+    AppointmentModel.find({ service_id: id, status: 2 })
+        .populate('user_id', 'name email phone')
+        .exec(function (err, docs) {
+            callback(err, docs);
         });
 }

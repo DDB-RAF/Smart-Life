@@ -17,11 +17,11 @@ var selectSlot = function (event) {
     var td = $(event.currentTarget);
     var app_num = parseInt($(td.children('b')[0]).html().split(':')[1]);
     if (app_num >= parseInt($('#max_num').attr("value"))) {
-        Materialize.toast("Please change a slot!",1000);
+        Materialize.toast("Please change a slot!", 1000);
     } else {
         var user = $.session.get('user');
         if (user == undefined) {
-            Materialize.toast("Please login first!",1000);
+            Materialize.toast("Please login first!", 1000);
         } else {
             user = JSON.parse(user);
             $('#user_id').attr("value", user._id);
@@ -43,7 +43,8 @@ var addAppointment = function (event) {
             app: {
                 user_id: user_id,
                 slot_id: slot_id,
-                timeTable_id: timeTable_id
+                timeTable_id: timeTable_id,
+                service_id: getUrlParameter('id')
             }
         },
         success: function (data) {
@@ -127,9 +128,37 @@ $(document).ready(function () {
         }
     });
     
+    
+    //add comment
+    $.ajax({
+        type: 'GET',
+        url: '/appointment/queryByServiceId',
+        data: {
+            id: getUrlParameter('id')
+        },
+        success: function (data) {
+            var tr = $('<tr/>');
+            for (i in data) {
+                var td = $('<td/>', { class: "col s3" });
+                var cardDiv = $('<div/>', { class: "blue-grey darken-1 card" });
+                var contentDIV = $('<div/>', { class: "card-content white-text" });
+                $('<span/>', { class: "card-title", html: data[i].user_id.name }).appendTo(contentDIV);
+                $('<p/>', { html: data[i].comment }).appendTo(contentDIV);
+
+                contentDIV.appendTo(cardDiv);
+                cardDiv.appendTo(td);
+                td.appendTo(tr);
+                if (i % 3 == 2 || i == data.length - 1) {
+                    tr.appendTo($('#commentTbody'));
+                    tr = $('<tr/>');
+                }
+            }
+        }
+    })
+    
     //add event
     $('#addAppointment').click(addAppointment);
-    
+
     var user = $.session.get('user');
     var supplier = $.session.get('supplier');
     if (user == undefined && supplier == undefined) {
@@ -154,4 +183,5 @@ $(document).ready(function () {
             html: "Login"
         })).appendTo($('#nav-mobile'));
     }
+
 });

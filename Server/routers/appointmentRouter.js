@@ -72,4 +72,16 @@ router.post('/add', function (req, res, next) {
         }
     })
 });
+
+router.get('/queryByServiceId',function(req,res,next){
+    var id = req.query.id;
+    appointmentDAO.queryByServiceId(id,function(err,docs){
+        if(err){
+            next(err);
+        }else{
+            res.send(docs);
+        }
+    })
+});
+
 module.exports = router;

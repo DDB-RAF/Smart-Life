@@ -53,6 +53,7 @@ exports.appointmentSchema = new Schema({
 	user_id:{type:Schema.Types.ObjectId,ref:'user'},
 	slot_id:Schema.Types.ObjectId,
 	timeTable_id:{type:Schema.Types.ObjectId,ref:'timeTable'},
+    service_id:{type:Schema.Types.ObjectId,ref:'service'},
 	status:{type:Number,default:0}, //0:not finished,1:finished,2:commented
 	comment:{type:String,default:''}
 });
