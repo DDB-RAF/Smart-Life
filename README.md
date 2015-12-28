@@ -15,3 +15,9 @@ please install the require module.
     "mongoose": "^4.2.5"
   }
 ```
+
+If you want to use the test data,
+please `mongorestore` to backup the data from '/docs/dump/test'
+```shell
+mongorestore -d test docs/dump/test
+```
