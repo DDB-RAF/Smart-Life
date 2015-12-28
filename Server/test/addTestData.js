@@ -7,28 +7,28 @@ var timeTableDAO =require('../dao/timeTableDAO.js');
 
 
 for (var i = 0; i < 3; i++) {
-	// var user = {
-	// 	userName: 'zhangfei' + i,
-	// 	passWord: 'zhagnfei',
-	// 	name: 'Fly zhang',
-	// 	email: 'zhangfei614@126.com',
-	// 	phone: '188'
-	// };
-	// userDAO.add(user, function (err) {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		console.log("add user success");
-	// 	}
-	// });
+    var user = {
+        userName: 'zhangfei' + i,
+        passWord: 'zhangfei',
+        name: 'Fly zhang'+i,
+        email: 'zhangfei614@126.com',
+        phone: '15513008577'
+    };
+    userDAO.add(user, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("add user success");
+        }
+    });
 
 	var supplier = {
 		userName: 'school' + i,
 		passWord: 'school',
-		name: "school ",
+		name: "school supplier"+i,
 		email: "zhangfei614@126.com",
-		phone: "155",
-		desc: "school",
+		phone: "15513008577",
+		desc: "school desc"+i,
 		classification: "school"
 	};
 
@@ -46,7 +46,7 @@ for (var i = 0; i < 3; i++) {
 					end_time: '17:00',
 					slot_length: 0.5,
 					max_num: 5,
-					desc: 'school service'
+					desc: 'school service'+i
 				};
 				serviceDAO.add(service, function (err, d) {
 					if (err) {
